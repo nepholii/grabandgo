@@ -1,89 +1,99 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Cart</title>
- <style>
-   
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    <title>Your Cart – Grab & Go</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+         body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #fff;
+    }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background-color: #FF3C00;
+        }
+
+        .total {
+            font-weight: bold;
+            text-align: right;
+            padding-top: 20px;
+            font-size: 18px;
+        }
+        
+        @media screen and (min-width: 1280px) and (max-width: 1920px) {
+    h1 {
+        font-size: 42px;
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        color: #FFCC00;
+    }
+
+    table {
+        width: 90%;
+        margin: 0 auto;
+        font-size: 18px;
+    }
+
+    th, td {
+        padding: 20px;
+    }
+
+    th {
+        font-size: 20px;
+    }
+
+    .total {
+        font-size: 22px;
+        width: 90%;
+        margin: 30px auto;
+        color: #FFCC00;
+    }
 }
-
-
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #121212;
-    color: #fff;
-}
-
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #1e1e1e;
-    padding: 20px 40px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #FFCC00;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-}
-
-.nav-links li a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav-links li a:hover {
-    color: #FFCC00;
-}
-
-.btn-order {
-    background-color: #FF3C00;
-    padding: 10px 20px;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background 0.3s ease;
-}
-
-.btn-order:hover {
-    background-color: #FFA500;
-}
-</style>
-
+        
+    </style>
 </head>
 <body>
- <header class="navbar">
-        <div class="logo">Grab & Go</div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="index.jsp">Home</a></li>
-                <li><a href="menu.jsp">Menu</a></li>
-                <li><a href="cart.jsp">Cart</a></li>
-                <li><a href="aboutus.jsp">About US</a></li>
-            </ul>
-        </nav>
-        <a href="order.jsp" class="btn-order">Order Now</a>
-    </header>
+
+<h1>Your Cart</h1>
+
+<table id="cart-table">
+    <thead>
+        <tr>
+            <th>Food Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Items will be injected here -->
+    </tbody>
+</table>
+
+<p class="total" id="cart-total">Total: $0</p>
+
 
 
 </body>

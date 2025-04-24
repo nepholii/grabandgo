@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="header.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
     <link rel="stylesheet" href="css/menu.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-    /* Reset */
+  
 * {
     margin: 0;
     padding: 0;
@@ -20,45 +21,6 @@ body {
     color: #fff;
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #1e1e1e;
-    padding: 20px 40px;
-}
-
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #FFCC00;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-}
-
-.nav-links li a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.nav-links li a.active,
-.nav-links li a:hover {
-    color: #FFCC00;
-}
-
-.btn-order {
-    background-color: #FF3C00;
-    padding: 10px 20px;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-}
 
 .menu-section {
     padding: 60px 40px;
@@ -135,28 +97,70 @@ body {
 .order-btn:hover {
     background-color: #FFA500;
 }
+
+   .footer {
+        background-color: #1e1e1e;
+        text-align: center;
+        padding: 20px 0;
+        font-size: 14px;
+        color: #ccc;
+    }
+    
+    @media screen and (min-width: 1280px) and (max-width: 1920px) {
+    .hero-content h1 {
+        font-size: 60px;
+    }
+
+    .hero-content p {
+        font-size: 24px;
+    }
+
+    .hero-btn {
+        font-size: 20px;
+        padding: 16px 32px;
+    }
+
+    .section-title {
+        font-size: 40px;
+    }
+
+    .menu-item {
+        padding: 25px;
+        max-width: 350px;
+    }
+
+    .menu-item img {
+        height: 220px;
+    }
+
+    .menu-item h3 {
+        font-size: 24px;
+    }
+
+    .menu-item p {
+        font-size: 16px;
+    }
+
+    .price {
+        font-size: 20px;
+    }
+
+    .order-btn {
+        font-size: 16px;
+        padding: 12px 24px;
+    }
+}
+    
+
     </style>
 </head>
 <body>
-
-<header class="navbar">
-    <div class="logo">Grab & Go</div>
-    <nav>
-        <ul class="nav-links">
-            <li><a href="index.jsp">Home</a></li>
-            <li><a href="menu.jsp" class="active">Menu</a></li>
-            <li><a href="cart.jsp">Cart</a></li>
-            <li><a href="aboutus.jsp">About US</a></li>
-        </ul>
-    </nav>
-    <a href="order.jsp" class="btn-order">Order Now</a>
-</header>
 
 <section class="menu-section">
     <h2 class="section-title">Our Full Menu</h2>
     <div class="menu-grid">
 
-        <!-- Item 1 -->
+        
         <div class="menu-item">
             <img src="images/burger.jpg" alt="Classic Burger">
             <h3>Classic Burger</h3>
@@ -169,7 +173,7 @@ body {
             </form>
         </div>
 
-        <!-- Item 2 -->
+        
         <div class="menu-item">
             <img src="images/fries.jpg" alt="Crispy Fries">
             <h3>Crispy Fries</h3>
@@ -182,7 +186,7 @@ body {
             </form>
         </div>
 
-        <!-- Item 3 -->
+        
         <div class="menu-item">
             <img src="images/combo.jpg" alt="Combo Meal">
             <h3>Combo Meal</h3>
@@ -195,7 +199,7 @@ body {
             </form>
         </div>
 
-        <!-- Item 4 -->
+       
         <div class="menu-item">
             <img src="images/cheese pizza.jpg" alt="Cheesy Pizza">
             <h3>Cheesy Pizza</h3>
@@ -208,7 +212,7 @@ body {
             </form>
         </div>
 
-        <!-- Item 5 -->
+        
         <div class="menu-item">
             <img src="images/hot dog.jpg" alt="Hot Dog">
             <h3>Hot Dog</h3>
@@ -221,7 +225,7 @@ body {
             </form>
         </div>
 
-        <!-- Item 6 -->
+       
         <div class="menu-item">
             <img src="images/sandwitch.jpg" alt="Chicken Sandwich">
             <h3>Chicken Sandwich</h3>
@@ -234,7 +238,7 @@ body {
             </form>
         </div>
 
-        <!-- Item 7 -->
+        
         <div class="menu-item">
             <img src="images/milkshake.jpg" alt="Milkshake">
             <h3>Milkshake</h3>
@@ -247,7 +251,7 @@ body {
             </form>
         </div>
 
-        <!-- Item 8 -->
+        
         <div class="menu-item">
             <img src="images/salad.jpg" alt="Healthy Salad">
             <h3>Healthy Salad</h3>
@@ -260,7 +264,7 @@ body {
             </form>
         </div>
 
-        <!-- Item 9 -->
+       
         <div class="menu-item">
             <img src="images/nuggest.jpg" alt="Chicken Nuggets">
             <h3>Chicken Nuggets</h3>
@@ -407,6 +411,12 @@ body {
 
     </div>
 </section>
+
+
+<footer class="footer">
+    <p>&copy; 2025 Grab & Go. All rights reserved.</p>
+</footer>
+
 
 </body>
 </html>

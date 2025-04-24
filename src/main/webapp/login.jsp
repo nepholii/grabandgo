@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-       <style>
-        * {
+    <style>* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -116,27 +115,48 @@
             margin-bottom: 15px;
             text-align: center;
         }
+        
+        @media screen and (min-width: 1280px) and (max-width: 1920px) {
+    /* Styles for large desktop screens (1280px to 1920px) */
+    .login-container {
+        width: 60%;
+        height: auto;
+        padding: 30px;
+    }
 
-        @media (max-width: 768px) {
-            .login-container {
-                flex-direction: column;
-            }
-            
-            .welcome-panel, .form-container {
-                width: 100%;
-                padding: 40px;
-            }
-            
-            .welcome-panel {
-                border-radius: 0 0 30px 30px;
-                order: 2;
-            }
-            
-            .form-container {
-                order: 1;
-            }
-        }
-    </style>
+    .form-container {
+        padding: 40px;
+    }
+
+    .welcome-panel {
+        width: 50%;
+        padding: 50px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    input {
+        padding: 16px;
+        font-size: 18px;
+    }
+
+    button {
+        padding: 16px 50px;
+        font-size: 18px;
+    }
+
+    .ghost {
+        font-size: 18px;
+    }
+
+    .error-message {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+}
+        </style>
 </head>
 <body>
     <div class="login-container">
@@ -145,11 +165,10 @@
             <form action="LoginServlet" method="post">
                 <h1>Login</h1>
                 
-                <% if (request.getParameter("error") != null) { %>
-                    <div class="error-message">
-                        Invalid username or password!
-                    </div>
-                <% } %>
+                 <c:if test="${not empty param.error}">
+                    <div class="error-message">${param.error}</div>
+                </c:if>
+               
                             
                 <input type="text" name="username" required placeholder="Username">
 				<input type="password" placeholder="Password" name="password" required>               

@@ -1,52 +1,58 @@
 package DAO;
 
 import java.sql.*;
+
 import Model.User;
 import security.PasswordUtils;
 import Database.DatabaseConnection;
 
 public class UserDAO {
 
-   
-    public boolean registerUser(String username, String password, String role) throws ClassNotFoundException {
+    public boolean registerUser(User user) throws ClassNotFoundException {
         String checkQuery = "SELECT COUNT(*) FROM users WHERE username = ?";
-        String insertQuery = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
+        String insertQuery = "INSERT INTO users (first_name, last_name, username, phone, email, password, address, gender, role, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
              PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
 
-         
-            checkStmt.setString(1, username);
+            checkStmt.setString(1, user.getUsername());
             ResultSet rs = checkStmt.executeQuery();
             if (rs.next() && rs.getInt(1) > 0) {
-                System.out.println("Registration Failed: Username already exists.");
+                System.out.println("⚠️ Registration Failed: Username already exists.");
                 return false;
             }
 
-       
-            String hashedPassword = PasswordUtils.hashPassword(password);
+          
+            String hashedPassword = PasswordUtils.hashPassword(user.getPassword());
 
-      
-            insertStmt.setString(1, username);
-            insertStmt.setString(2, hashedPassword);
-            insertStmt.setString(3, role);
+            // Insert user into database
+            insertStmt.setString(1, user.getFirstName());
+            insertStmt.setString(2, user.getLastName());
+            insertStmt.setString(3, user.getUsername());
+            insertStmt.setString(4, user.getPhone());
+            insertStmt.setString(5, user.getEmail());
+            insertStmt.setString(6, hashedPassword);
+            insertStmt.setString(7, user.getAddress());
+            insertStmt.setString(8, user.getGender());
+            insertStmt.setString(9, user.getRole());
+            insertStmt.setString(10, user.getStatus());
 
             int rowsInserted = insertStmt.executeUpdate();
-            System.out.println("Registration Successful. Rows Inserted: " + rowsInserted);
+            System.out.println(" Registration Successful. Rows Inserted: " + rowsInserted);
             return rowsInserted > 0;
 
         } catch (SQLException e) {
-            System.err.println("❌ SQL Error: " + e.getMessage());
+            System.err.println(" SQL Error during registration: " + e.getMessage());
             e.printStackTrace();
         }
 
         return false;
     }
 
-    // ✅ Validate User (Login)
+   
     public User validateUser(String username, String password) throws ClassNotFoundException {
-        String query = "SELECT id, username, password, role FROM users WHERE username = ?";
+        String query = "SELECT * FROM users WHERE username = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -56,24 +62,109 @@ public class UserDAO {
 
             if (rs.next()) {
                 String storedHashedPassword = rs.getString("password");
-                String role = rs.getString("role");
 
                 if (PasswordUtils.checkPassword(password, storedHashedPassword)) {
-                    return new User(
-                        rs.getInt("id"),
-                        rs.getString("username"),
-                        storedHashedPassword,
-                        role
-                    );
+                   
+                    User user = new User();
+                    user.setId(rs.getInt("user_id"));
+                    user.setFirstName(rs.getString("first_name"));
+                    user.setLastName(rs.getString("last_name"));
+                    user.setUsername(rs.getString("username"));
+                    user.setPhone(rs.getString("phone"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPassword(storedHashedPassword);
+                    user.setAddress(rs.getString("address"));
+                    user.setGender(rs.getString("gender"));
+                    user.setRole(rs.getString("role"));
+                    user.setStatus(rs.getString("status"));
+
+                    return user;
                 }
             }
 
             rs.close();
         } catch (SQLException e) {
-            System.err.println("Error while validating user: " + e.getMessage());
+            System.err.println("SQL Error during login: " + e.getMessage());
             e.printStackTrace();
         }
 
         return null;
     }
+   
+    public boolean updateUser(User user) throws ClassNotFoundException {
+        String query = "UPDATE users SET first_name = ?, last_name = ?, username = ?, " +
+                       "phone = ?, email = ?, password = ?, address = ?, gender = ? " +
+                       "WHERE user_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setString(1, user.getFirstName());
+            stmt.setString(2, user.getLastName());
+            stmt.setString(3, user.getUsername());
+            stmt.setString(4, user.getPhone());
+            stmt.setString(5, user.getEmail());
+            stmt.setString(6, user.getPassword());
+            stmt.setString(7, user.getAddress());
+            stmt.setString(8, user.getGender());
+            stmt.setInt(9, user.getId());
+
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+            
+        } catch (SQLException e) {
+            System.err.println("Error updating user: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+   
+    public User getUserById(int userId) throws ClassNotFoundException {
+        String query = "SELECT * FROM users WHERE user_id = ?";
+        
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return new User(
+                    rs.getInt("user_id"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getString("username"),
+                    rs.getString("phone"),
+                    rs.getString("email"),
+                    rs.getString("password"),
+                    rs.getString("address"),
+                    rs.getString("gender"),
+                    rs.getString("role"),
+                    rs.getString("status")
+                );
+            }
+        } catch (SQLException e) {
+            System.err.println("Error getting user by ID: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static int getUserCount() {
+        int count = 0;
+        try {
+            Connection con = DatabaseConnection.getConnection();
+            String sql = "SELECT COUNT(*) FROM users";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
 }

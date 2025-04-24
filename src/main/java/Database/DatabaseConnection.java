@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private final static String databaseName = "grabandgo";
+    private final static String databaseName = "grab&go";
     private final static String username = "root";
-    private final static String password = "";
+    private final static String password = "Nischay1@";
     private final static String dbUrl = "jdbc:mysql://localhost:3306/" + databaseName;
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException {

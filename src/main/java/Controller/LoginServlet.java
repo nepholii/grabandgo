@@ -30,8 +30,28 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("userId", user.getId());
             session.setAttribute("username", user.getUsername());
             session.setAttribute("role", user.getRole());
+            session.setMaxInactiveInterval(15 * 60);  // 15 minutes
 
-            session.setMaxInactiveInterval(15 * 60);
+//         // Create a cookie for username
+//            Cookie usernameCookie = new Cookie("username", user.getUsername());
+//
+//            // Optional: create a cookie for role
+//            Cookie roleCookie = new Cookie("role", user.getRole());
+//
+//            // Set cookie max age to 15 minutes (in seconds)
+//            usernameCookie.setMaxAge(15 * 60);
+//            roleCookie.setMaxAge(15 * 60);
+//
+//            // Optional: Secure & HttpOnly flags for better security (if using HTTPS)
+//            usernameCookie.setHttpOnly(true);
+//            roleCookie.setHttpOnly(true);
+//
+//            // Add cookies to the response
+//            response.addCookie(usernameCookie);
+//            response.addCookie(roleCookie);
+
+
+     
             
             System.out.println("✅ User Role: " + user.getRole());
 
@@ -41,7 +61,7 @@ public class LoginServlet extends HttpServlet {
                 try {
                     switch (role.toLowerCase()) {
                         case "admin":
-                            System.out.println("🔄 Redirecting to admin-dashboard.jsp");
+                            System.out.println(" Redirecting to admin-dashboard.jsp");
                             response.sendRedirect("admin-dashboard.jsp");
                             return;
                         case "staff":
@@ -66,7 +86,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("login.jsp?error=Role is empty or null.");
             }
         } else {
-            System.out.println("❌ Invalid credentials for username: " + username);
+            System.out.println(" Invalid credentials for username: " + username);
             response.sendRedirect("login.jsp?error=Invalid credentials");
         }
     }
