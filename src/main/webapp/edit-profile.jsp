@@ -78,6 +78,14 @@
             background-color: #FFA500;
         }
         
+        .footer {
+            background-color: #1e1e1e;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+            color: #ccc;
+        }
+        
          @media screen and (min-width: 1280px) and (max-width: 1920px) {
             .edit-container {
                 max-width: 600px;
@@ -102,57 +110,61 @@
 </head>
 <body>
 
-<div class="edit-container">
-    <h2>Edit Profile</h2>
-    <form action="UpdateCustomerServlet" method="post">
-        <div class="form-group">
-            <label for="first_name">First Name</label>
-            <input type="text" id="first_name" name="first_name" placeholder="Enter first name">
-        </div>
+	<div class="edit-container">
+	    <h2>Edit Profile</h2>
+	    <form action="UpdateCustomerServlet" method="post">
+	        <div class="form-group">
+	            <label for="first_name">First Name</label>
+	            <input type="text" id="first_name" name="first_name" placeholder="Enter first name">
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="last_name">Last Name</label>
+	            <input type="text" id="last_name" name="last_name" placeholder="Enter last name">
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="username">Username</label>
+	            <input type="text" id="username" name="username" placeholder="Enter new username">
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="phone">Phone</label>
+	            <input type="tel" id="phone" name="phone" placeholder="Enter phone number">
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="email">Email</label>
+	            <input type="email" id="email" name="email" placeholder="Enter email address">
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="password">Password</label>
+	            <input type="password" id="password" name="password" placeholder="Enter new password">
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="address">Address</label>
+	            <textarea id="address" name="address" rows="3" placeholder="Enter address"></textarea>
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="gender">Gender</label>
+	            <select id="gender" name="gender">
+	                <option value="" disabled selected>Select gender</option>
+	                <option value="Male">Male</option>
+	                <option value="Female">Female</option>
+	                <option value="Other">Other</option>
+	            </select>
+	        </div>
+	
+	        <button type="submit" class="save-btn">Save Changes</button>
+	    </form>
+	</div>
 
-        <div class="form-group">
-            <label for="last_name">Last Name</label>
-            <input type="text" id="last_name" name="last_name" placeholder="Enter last name">
-        </div>
-
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Enter new username">
-        </div>
-
-        <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" placeholder="Enter phone number">
-        </div>
-
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter email address">
-        </div>
-
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter new password">
-        </div>
-
-        <div class="form-group">
-            <label for="address">Address</label>
-            <textarea id="address" name="address" rows="3" placeholder="Enter address"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="gender">Gender</label>
-            <select id="gender" name="gender">
-                <option value="" disabled selected>Select gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-
-        <button type="submit" class="save-btn">Save Changes</button>
-    </form>
-</div>
+    <footer class="footer">
+	    <p>&copy; 2025 Grab & Go. All rights reserved.</p>
+	</footer>
 
 </body>
 </html>

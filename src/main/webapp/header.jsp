@@ -150,7 +150,7 @@
     <nav>
         <ul class="nav-links">
             <li><a href="customer-dashboard.jsp">Home</a></li>
-            <li><a href="menu.jsp">Menu</a></li>
+            <li><a href="MenuServlet">Menu</a></li>
             <li><a href="cart.jsp">Cart</a></li>
             <li><a href="aboutus.jsp">About us</a></li>
         </ul>
