@@ -17,69 +17,21 @@
             height: 100%;
             font-family: 'Segoe UI', sans-serif;
             background-color: #f4f7fa;
-            overflow: hidden;
-        }
-
-        .navbar {
-            height: 60px;
-            background-color: #1e1e1e;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #FFCC00;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-        }
-
-        .nav-links li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .profile-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .profile-name {
-            color: #FFCC00;
-            font-weight: 600;
-            margin-left: 10px;
         }
 
         .grid-wrapper {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 90vh;
-            padding-top: 20px;
+            padding-top: 60px;
         }
 
         .grid-row {
             display: flex;
             gap: 40px;
             margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .grid-card {
@@ -87,25 +39,25 @@
             height: 220px;
             background-color: white;
             border-radius: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-decoration: none;
             color: #333;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .grid-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
 
-        .grid-card i {
-            font-size: 50px;
+        .icon {
+            width: 50px;
+            height: 50px;
             margin-bottom: 15px;
-            color: #3498db;
         }
 
         .grid-card h2 {
@@ -114,18 +66,14 @@
         }
 
         @media screen and (max-width: 768px) {
-            .grid-row {
-                flex-direction: column;
-                align-items: center;
-            }
-
             .grid-card {
                 width: 180px;
                 height: 180px;
             }
 
-            .grid-card i {
-                font-size: 40px;
+            .icon {
+                width: 40px;
+                height: 40px;
             }
 
             .grid-card h2 {
@@ -138,29 +86,49 @@
 
 <div class="grid-wrapper">
     <div class="grid-row">
-        <a href="add-staff.jsp" class="grid-card">
-            <i class="fas fa-user-plus"></i>
+        <!-- Create Staff -->
+        <a href="create-staff.jsp" class="grid-card">
+            <svg class="icon" fill="#3498db" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 
+                         10-4.48 10-10S17.52 2 12 2zm1 11h3v2h-3v3h-2v-3H8v-2h3V10h2v3z"/>
+            </svg>
             <h2>Create Staff</h2>
         </a>
+
+        <!-- View Staff -->
         <a href="view-staff.jsp" class="grid-card">
-            <i class="fas fa-users"></i>
+            <svg class="icon" fill="#27ae60" viewBox="0 0 24 24">
+                <path d="M12 6c-5 0-9 4.5-9 6s4 6 9 6 9-4.5 9-6-4-6-9-6zm0 10a4 4 0 1 1 
+                         0-8 4 4 0 0 1 0 8z"/>
+            </svg>
             <h2>View Staff</h2>
         </a>
     </div>
+
     <div class="grid-row">
+        <!-- Update Staff -->
         <a href="update-staff.jsp" class="grid-card">
-            <i class="fas fa-user-edit"></i>
+            <svg class="icon" fill="#f39c12" viewBox="0 0 24 24">
+                <path d="M3 17.25V21h3.75l11-11.04-3.75-3.75L3 17.25zM20.71 
+                         7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 
+                         1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"/>
+            </svg>
             <h2>Update Staff</h2>
         </a>
+
+        <!-- Delete Staff -->
         <a href="delete-staff.jsp" class="grid-card">
-            <i class="fas fa-user-times"></i>
+            <svg class="icon" fill="#e74c3c" viewBox="0 0 24 24">
+                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 
+                         2-.9 2-2V7H6v12zm3.46-7.12L12 13.59l2.54-2.71 
+                         1.42 1.42L13.41 15l2.55 2.55-1.42 1.41L12 
+                         16.41l-2.55 2.55-1.41-1.41L10.59 15l-2.55-2.55 
+                         1.42-1.42zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/>
+            </svg>
             <h2>Delete Staff</h2>
         </a>
     </div>
 </div>
-
-<!-- Font Awesome -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 </body>
 </html>

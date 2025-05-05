@@ -108,7 +108,7 @@ a.logo {
         <ul class="nav-links">
             <li><a href="admin-dashboard.jsp">Dashboard</a></li>
             <li><a href="manage-users.jsp">Users</a></li>
-            <li><a href="manage-staff.jsp">Staff</a></li>
+            <li><a href="manage-staffs.jsp">Staff</a></li>
             <li><a href="manage-products.jsp">Products</a></li>
         </ul>
     </nav>

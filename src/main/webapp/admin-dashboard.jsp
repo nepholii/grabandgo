@@ -75,24 +75,28 @@
 <div class="dashboard-container">
     <h2>Dashboard</h2>
 
+   
     <!-- Stat Cards -->
-    <div class="card-row">
-        <div class="card">
-            <i class="fas fa-users"></i>
-            <h3><%= customerCount %></h3>
-            <p>Customers</p>
-        </div>
-        <div class="card">
-            <i class="fas fa-user-tie"></i>
-            <h3><%= staffCount %></h3>
-            <p>Staff</p>
-        </div>
-        <div class="card">
-            <i class="fas fa-boxes"></i>
-            <h3><%= productCount %></h3>
-            <p>Products</p>
-        </div>
+<div class="card-row">
+    <div class="card">
+        <div style="font-size: 40px; margin-bottom: 10px;">👥</div>
+        <h3><%= customerCount %></h3>
+        <p>Customers</p>
     </div>
+
+    <div class="card">
+        <div style="font-size: 40px; margin-bottom: 10px;">🧑‍💼</div>
+        <h3><%= staffCount %></h3>
+        <p>Staff</p>
+    </div>
+
+    <div class="card">
+        <div style="font-size: 40px; margin-bottom: 10px;">🍔</div>
+        <h3><%= productCount %></h3>
+        <p>Products</p>
+    </div>
+</div>
+    
 
     <!-- Orders Chart -->
     <div class="chart-section">
