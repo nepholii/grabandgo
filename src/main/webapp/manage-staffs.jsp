@@ -96,7 +96,7 @@
         </a>
 
         <!-- View Staff -->
-        <a href="view-staff.jsp" class="grid-card">
+        <a href="viewStaff" class="grid-card">
             <svg class="icon" fill="#27ae60" viewBox="0 0 24 24">
                 <path d="M12 6c-5 0-9 4.5-9 6s4 6 9 6 9-4.5 9-6-4-6-9-6zm0 10a4 4 0 1 1 
                          0-8 4 4 0 0 1 0 8z"/>
@@ -107,7 +107,7 @@
 
     <div class="grid-row">
         <!-- Update Staff -->
-        <a href="update-staff.jsp" class="grid-card">
+        <a href="updateStaff.jsp" class="grid-card">
             <svg class="icon" fill="#f39c12" viewBox="0 0 24 24">
                 <path d="M3 17.25V21h3.75l11-11.04-3.75-3.75L3 17.25zM20.71 
                          7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 
@@ -117,7 +117,7 @@
         </a>
 
         <!-- Delete Staff -->
-        <a href="delete-staff.jsp" class="grid-card">
+        <a href="deleteStaff.jsp" class="grid-card">
             <svg class="icon" fill="#e74c3c" viewBox="0 0 24 24">
                 <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 
                          2-.9 2-2V7H6v12zm3.46-7.12L12 13.59l2.54-2.71 

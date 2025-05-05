@@ -32,23 +32,23 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("role", user.getRole());
             session.setMaxInactiveInterval(15 * 60);  // 15 minutes
 
-//         // Create a cookie for username
-//            Cookie usernameCookie = new Cookie("username", user.getUsername());
-//
-//            // Optional: create a cookie for role
-//            Cookie roleCookie = new Cookie("role", user.getRole());
-//
-//            // Set cookie max age to 15 minutes (in seconds)
-//            usernameCookie.setMaxAge(15 * 60);
-//            roleCookie.setMaxAge(15 * 60);
-//
-//            // Optional: Secure & HttpOnly flags for better security (if using HTTPS)
-//            usernameCookie.setHttpOnly(true);
-//            roleCookie.setHttpOnly(true);
-//
-//            // Add cookies to the response
-//            response.addCookie(usernameCookie);
-//            response.addCookie(roleCookie);
+         // Create a cookie for username
+            Cookie usernameCookie = new Cookie("username", user.getUsername());
+
+            // Optional: create a cookie for role
+            Cookie roleCookie = new Cookie("role", user.getRole());
+
+            // Set cookie max age to 15 minutes (in seconds)
+            usernameCookie.setMaxAge(15 * 60);
+            roleCookie.setMaxAge(15 * 60);
+
+            // Optional: Secure & HttpOnly flags for better security (if using HTTPS)
+            usernameCookie.setHttpOnly(true);
+            roleCookie.setHttpOnly(true);
+
+            // Add cookies to the response
+            response.addCookie(usernameCookie);
+            response.addCookie(roleCookie);
 
 
      
