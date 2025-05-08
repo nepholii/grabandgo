@@ -191,46 +191,24 @@
     </c:if>
     
     <div class="menu-grid">
-        <c:forEach items="${foodItems}" var="food">
+    <c:forEach items="${foodItems}" var="food">
+        <a href="FoodDetailsServlet?foodId=${food.foodId}" style="text-decoration: none;">
             <div class="menu-item">
                 <img src="${not empty food.imagePath ? food.imagePath : 'images/default-food.jpg'}" 
                      alt="${food.foodName}" loading="lazy">
                 <h3>${food.foodName}</h3>
                 <p>${not empty food.foodDescription ? food.foodDescription : 'Delicious food item'}</p>
                 <span class="price">$${String.format("%.2f", food.foodPrice)}</span>
-                
-                <form action="cart" method="post">
-                    <input type="hidden" name="action" value="add">
-                    <input type="hidden" name="foodId" value="${food.foodId}">
-                    <input type="hidden" name="foodName" value="${food.foodName}">
-                    <input type="hidden" name="price" value="${food.foodPrice}">
-                    
-                    <div class="quantity-adjuster">
-                        <button type="button" class="quantity-btn minus">-</button>
-                        <input type="number" name="quantity" value="1" min="1" max="${food.quantity}" 
-                               class="quantity-input">
-                        <button type="button" class="quantity-btn plus">+</button>
-                    </div>
-                    
-                    <c:choose>
-                        <c:when test="${food.quantity > 0}">
-                            <button type="submit" class="add-to-cart-btn">
-                                Add to Cart
-                            </button>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="out-of-stock">Out of Stock</div>
-                        </c:otherwise>
-                    </c:choose>
-                </form>
+                <c:if test="${food.quantity == 0}">
+                    <div class="out-of-stock">Out of Stock</div>
+                </c:if>
             </div>
-        </c:forEach>
-    </div>
+        </a>
+    </c:forEach>
+</div>
 </section>
 
-<footer class="footer">
-    <p>&copy; 2025 Grab & Go. All rights reserved.</p>
-</footer>
+
 
 <script>
     document.querySelectorAll('.quantity-btn').forEach(btn => {

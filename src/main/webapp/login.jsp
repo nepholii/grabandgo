@@ -4,183 +4,244 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <style>* {
+    <style>
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         body {
-            background-color: #2e2e2e;
+            background: linear-gradient(to right, #1a1a1a, #333);
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
         }
 
-        .login-container {
-            background-color: white;
-            border-radius: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-            width: 768px;
-            max-width: 100%;
-            min-height: 480px;
+        .container {
             display: flex;
+            width: 900px;
+            height: 600px;
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .form-container {
-            width: 50%;
+            flex: 1;
+            padding: 40px;
+            background-color: #fff;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 40px;
-        }
-
-        .welcome-panel {
-            background: linear-gradient(to right, #FF8C00, #FFA500);
-            color: white;
-            width: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0 40px;
-            text-align: center;
-            border-radius: 0 30px 30px 0;
         }
 
         form {
-            width: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
-        h1 {
+        form h1 {
             margin-bottom: 20px;
             color: #333;
-        }
-
-        span {
-            margin-bottom: 20px;
-            color: #666;
-            font-size: 14px;
-            display: block;
-        }
-
-        input {
-            background-color: #eee;
-            border: none;
-            margin: 8px 0;
-            padding: 12px 15px;
-            width: 100%;
-            border-radius: 8px;
-            font-size: 14px;
-        }
-
-        button {
-            background-color: #FF8C00;
-            color: white;
-            border: none;
-            padding: 12px 45px;
-            border-radius: 8px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-top: 10px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .ghost {
-            background-color: transparent;
-            border: 1px solid white;
-            color: white;
-            padding: 12px 45px;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
-            width: 100%;
             text-align: center;
         }
 
-        p {
-            margin: 20px 0 30px;
+        input {
+            margin-bottom: 12px;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
             font-size: 14px;
-            line-height: 1.5;
+            background-color: #f9f9f9;
+        }
+
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(to right, #ff6a00, #ee0979);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.9;
         }
 
         .error-message {
             color: red;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-align: center;
         }
-        
-        @media screen and (min-width: 1280px) and (max-width: 1920px) {
-    /* Styles for large desktop screens (1280px to 1920px) */
-    .login-container {
-        width: 60%;
-        height: auto;
-        padding: 30px;
-    }
 
-    .form-container {
+        .welcome-panel {
+            background: linear-gradient(to right, #ff6a00, #ee0979);
+            color: white;
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .welcome-img {
+            max-width: 180px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-panel h1 {
+            margin-bottom: 10px;
+            font-size: 26px;
+        }
+
+        .welcome-panel p {
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .ghost {
+            background-color: white;
+            color: #ff6a00;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .ghost:hover {
+            background-color: #fff3e0;
+        }
+	        .password-wrapper {
+	    position: relative;
+	}
+	
+	.password-wrapper input {
+	    width: 100%;
+	    padding-right: 40px;
+	}
+	
+	.toggle-password {
+	    position: absolute;
+	    right: 10px;
+	    top: 50%;
+	    transform: translateY(-50%);
+	    cursor: pointer;
+	    user-select: none;
+	    font-size: 16px;
+	    color: #666;
+	}
+	.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0 20px;
+    font-size: 14px;
+    color: #555;
+	}
+	.remember-me input[type="checkbox"] {
+	    width: 16px;
+	    height: 16px;
+	    margin: 0 8px 0 0;
+	}
+	@media screen and (min-width: 1025px) {
+    body {
         padding: 40px;
     }
 
+    .container {
+        flex-direction: row;
+        width: 900px;
+        height: 600px;
+        margin: auto;
+    }
+
+    .form-container,
     .welcome-panel {
         width: 50%;
-        padding: 50px;
+        height: 100%;
+        border-radius: 0;
+        padding: 40px;
     }
 
-    h1 {
-        font-size: 36px;
+    .welcome-img {
+        max-width: 150px;
     }
 
-    input {
-        padding: 16px;
+    form h1, .welcome-panel h1 {
+        font-size: 26px;
+    }
+
+    input, button {
+        font-size: 16px;
+        padding: 10px 14px;
+    }
+
+    .toggle-password {
         font-size: 18px;
     }
 
-    button {
-        padding: 16px 50px;
-        font-size: 18px;
+    .remember-me {
+        font-size: 14px;
     }
 
     .ghost {
-        font-size: 18px;
+        font-size: 14px;
+        padding: 10px 20px;
     }
 
-    .error-message {
-        font-size: 16px;
-        margin-bottom: 20px;
-    }
-}
-        </style>
+
+    </style>
 </head>
 <body>
-    <div class="login-container">
-        
+    <div class="container">
         <div class="form-container">
             <form action="LoginServlet" method="post">
                 <h1>Login</h1>
-                
-                 <c:if test="${not empty param.error}">
+
+                  <c:if test="${not empty param.error}">
                     <div class="error-message">${param.error}</div>
                 </c:if>
-               
-                            
-                <input type="text" name="username" required placeholder="Username">
-				<input type="password" placeholder="Password" name="password" required>               
-                <button type="submit">LOGIN</button>
+
+                <input type="text" name="username" placeholder="Username" required>
+                <div class="password-wrapper">
+			    <input type="password" name="password" id="password" placeholder="Password" required>
+			    <span class="toggle-password" onclick="togglePassword()">👀</span>
+			</div>
+			<div class="remember-me">
+		    <input type="checkbox" name="remember" id="remember">
+		    <label for="remember">Remember Me</label>
+		</div>
+			
+
+                <button type="submit">Login</button>
             </form>
         </div>
-       
+
+        
         <div class="welcome-panel">
-            <h1>Hello, User!</h1>
-            <p>Register with your personal details to use all of site features</p>
+            <img src="images/Logo2.png" alt="Welcome" class="welcome-img">
+            <h1>Welcome Back!</h1>
+            <p>Enter your credentials to access your account</p>
+            <p style="margin-top: 10px; font-size: 14px;">Don't have an account?</p>
             <a href="register.jsp" class="ghost">Register</a>
         </div>
     </div>
+    
+    <script>
+    function togglePassword() {
+        const passwordField = document.getElementById("password");
+        const type = passwordField.type === "password" ? "text" : "password";
+        passwordField.type = type;
+    }
+</script>
 </body>
 </html>
