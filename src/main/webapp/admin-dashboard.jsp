@@ -4,10 +4,11 @@
 <%
     String loggedInAdmin = (String) session.getAttribute("username");
 
-    int customerCount = UserDAO.getUserCount(); 
-    int staffCount = 10;
+    int customerCount = UserDAO.getUserCountByRole("Customer"); 
+    int staffCount = UserDAO.getUserCountByRole("Staff"); 
     int productCount = 320;
 %>
+
 
 <!DOCTYPE html>
 <html>

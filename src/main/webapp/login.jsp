@@ -228,7 +228,9 @@
 
         
         <div class="welcome-panel">
-            <img src="images/Logo2.png" alt="Welcome" class="welcome-img">
+            <img src="images/Logo2.png" alt="Welcome" width="100">
+            
+           
             <h1>Welcome Back!</h1>
             <p>Enter your credentials to access your account</p>
             <p style="margin-top: 10px; font-size: 14px;">Don't have an account?</p>

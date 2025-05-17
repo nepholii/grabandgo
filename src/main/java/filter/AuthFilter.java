@@ -21,6 +21,14 @@ public class AuthFilter implements Filter {
         String contextPath = req.getContextPath();
 
         System.out.println("AuthFilter triggered for: " + uri);
+        if (uri.startsWith(contextPath + "/images/") ||
+                uri.startsWith(contextPath + "/css/") ||
+                uri.startsWith(contextPath + "/js/") ||
+                uri.endsWith(".png") || uri.endsWith(".jpg") ||
+                uri.endsWith(".css") || uri.endsWith(".js")) {
+                chain.doFilter(request, response);
+                return;
+            }
 
        
         if (uri.endsWith("login.jsp") || uri.endsWith("register.jsp")

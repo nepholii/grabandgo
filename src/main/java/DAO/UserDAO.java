@@ -1,6 +1,8 @@
 package DAO;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import Model.User;
 import security.PasswordUtils;
@@ -91,65 +93,8 @@ public class UserDAO {
         return null;
     }
    
-    public boolean updateUser(User user) throws ClassNotFoundException {
-        String query = "UPDATE users SET first_name = ?, last_name = ?, username = ?, " +
-                       "phone = ?, email = ?, password = ?, address = ?, gender = ? " +
-                       "WHERE user_id = ?";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            
-            stmt.setString(1, user.getFirstName());
-            stmt.setString(2, user.getLastName());
-            stmt.setString(3, user.getUsername());
-            stmt.setString(4, user.getPhone());
-            stmt.setString(5, user.getEmail());
-            stmt.setString(6, user.getPassword());
-            stmt.setString(7, user.getAddress());
-            stmt.setString(8, user.getGender());
-            stmt.setInt(9, user.getId());
-
-            int rowsUpdated = stmt.executeUpdate();
-            return rowsUpdated > 0;
-            
-        } catch (SQLException e) {
-            System.err.println("Error updating user: " + e.getMessage());
-            e.printStackTrace();
-            return false;
-        }
-    }
-
    
-    public User getUserById(int userId) throws ClassNotFoundException {
-        String query = "SELECT * FROM users WHERE user_id = ?";
-        
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            
-            stmt.setInt(1, userId);
-            ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                return new User(
-                    rs.getInt("user_id"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("username"),
-                    rs.getString("phone"),
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getString("address"),
-                    rs.getString("gender"),
-                    rs.getString("role"),
-                    rs.getString("status")
-                );
-            }
-        } catch (SQLException e) {
-            System.err.println("Error getting user by ID: " + e.getMessage());
-            e.printStackTrace();
-        }
-        return null;
-    }
+
     public static int getUserCount() {
         int count = 0;
         try {
@@ -166,5 +111,164 @@ public class UserDAO {
         }
         return count;
     }
+    public static int getUserCountByRole(String role) {
+        int count = 0;
+        try {
+             // your DB connection method
+        	Connection conn = DatabaseConnection.getConnection();
+            String sql = "SELECT COUNT(*) FROM users WHERE role = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, role);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+    public List<User> getUsersByRole(String role) throws ClassNotFoundException {
+        List<User> users = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "SELECT * FROM users WHERE role = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, role);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("user_id")); // MATCHES your DB
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setUsername(rs.getString("username"));
+                user.setPhone(rs.getString("phone"));
+                user.setEmail(rs.getString("email"));
+                user.setAddress(rs.getString("address"));
+                user.setGender(rs.getString("gender"));
+                user.setRole(rs.getString("role"));
+                user.setStatus(rs.getString("status"));
+                users.add(user);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
+    public User getUserById(int id) {
+        User user = null;
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "SELECT * FROM users WHERE user_id = ? AND role = 'Customer'";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt("user_id"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setUsername(rs.getString("username"));
+                user.setPhone(rs.getString("phone"));
+                user.setEmail(rs.getString("email"));
+                user.setAddress(rs.getString("address"));
+                user.setGender(rs.getString("gender"));
+                user.setRole(rs.getString("role"));
+                user.setStatus(rs.getString("status"));
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+    public boolean updateUser(User user) throws ClassNotFoundException {
+        String sql = "UPDATE users SET first_name=?, last_name=?, username=?, phone=?, email=?, status=?, address=?, gender=? WHERE user_id=?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, user.getFirstName());
+            stmt.setString(2, user.getLastName());
+            stmt.setString(3, user.getUsername());
+            stmt.setString(4, user.getPhone());
+            stmt.setString(5, user.getEmail());
+            stmt.setString(6, user.getStatus());
+            stmt.setString(7, user.getAddress());
+            stmt.setString(8, user.getGender());
+            stmt.setInt(9, user.getId()); // Make sure user.getId() returns user_id
+
+            int rowsUpdated = stmt.executeUpdate();
+            System.out.println("Rows updated: " + rowsUpdated);  // Debug info
+
+            return rowsUpdated > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public boolean deleteUser(int userId) throws ClassNotFoundException {
+        String findCartIdsSql = "SELECT cart_id FROM cart WHERE customer_id = ?";
+        String deleteCartFoodSql = "DELETE FROM cart_food WHERE cart_id = ?";
+        String deleteCartSql = "DELETE FROM cart WHERE customer_id = ?";
+        String deleteUserSql = "DELETE FROM users WHERE user_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            conn.setAutoCommit(false);
+
+            try (
+                PreparedStatement findCartStmt = conn.prepareStatement(findCartIdsSql);
+                PreparedStatement deleteCartFoodStmt = conn.prepareStatement(deleteCartFoodSql);
+                PreparedStatement deleteCartStmt = conn.prepareStatement(deleteCartSql);
+                PreparedStatement deleteUserStmt = conn.prepareStatement(deleteUserSql)
+            ) {
+                // 1. Find all cart_ids of the user
+                findCartStmt.setInt(1, userId);
+                ResultSet rs = findCartStmt.executeQuery();
+
+                // 2. For each cart_id, delete from cart_food
+                while (rs.next()) {
+                    int cartId = rs.getInt("cart_id");
+                    deleteCartFoodStmt.setInt(1, cartId);
+                    deleteCartFoodStmt.executeUpdate();
+                }
+
+                // 3. Delete from cart
+                deleteCartStmt.setInt(1, userId);
+                deleteCartStmt.executeUpdate();
+
+                // 4. Delete user
+                deleteUserStmt.setInt(1, userId);
+                int rowsAffected = deleteUserStmt.executeUpdate();
+
+                conn.commit();
+                return rowsAffected > 0;
+
+            } catch (SQLException e) {
+                conn.rollback();
+                e.printStackTrace();
+                return false;
+            } finally {
+                conn.setAutoCommit(true);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
+
 
 }

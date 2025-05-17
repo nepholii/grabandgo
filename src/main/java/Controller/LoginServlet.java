@@ -32,10 +32,10 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("role", user.getRole());
             session.setMaxInactiveInterval(15 * 60);  // 15 minutes
 
-         // Create a cookie for username
+       
             Cookie usernameCookie = new Cookie("username", user.getUsername());
 
-            // Optional: create a cookie for role
+         
             Cookie roleCookie = new Cookie("role", user.getRole());
 
             // Set cookie max age to 15 minutes (in seconds)
@@ -90,5 +90,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("login.jsp?error=Invalid credentials");
         }
     }
+  
+
 }
 
