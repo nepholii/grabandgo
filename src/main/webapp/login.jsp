@@ -4,155 +4,161 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', sans-serif;
-        }
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-        body {
-            background: linear-gradient(to right, #1a1a1a, #333);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+body {
+    background: linear-gradient(to right, #FFFFE0, #FFFDD0);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        .container {
-            display: flex;
-            width: 900px;
-            height: 600px;
-            background-color: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
+.container {
+    display: flex;
+    width: 900px;
+    height: 600px;
+    background-color: #FFFDD0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(119, 221, 119, 0.3);
+}
 
-        .form-container {
-            flex: 1;
-            padding: 40px;
-            background-color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+.form-container {
+    flex: 1;
+    padding: 40px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-        form {
-            display: flex;
-            flex-direction: column;
-        }
+form {
+    display: flex;
+    flex-direction: column;
+}
 
-        form h1 {
-            margin-bottom: 20px;
-            color: #333;
-            text-align: center;
-        }
+form h1 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
 
-        input {
-            margin-bottom: 12px;
-            padding: 10px 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 14px;
-            background-color: #f9f9f9;
-        }
+input {
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #FFFFE0;
+    color: #333;
+}
 
-        button {
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(to right, #ff6a00, #ee0979);
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, #77DD77, #E6E6FA);
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
 
-        button:hover {
-            opacity: 0.9;
-        }
+button:hover {
+    opacity: 0.9;
+}
 
-        .error-message {
-            color: red;
-            margin-bottom: 10px;
-            text-align: center;
-        }
+.error-message {
+    color: #cc6666;
+    margin-bottom: 10px;
+    text-align: center;
+}
 
-        .welcome-panel {
-            background: linear-gradient(to right, #ff6a00, #ee0979);
-            color: white;
-            flex: 1;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+.welcome-panel {
+    background: linear-gradient(to right, #77DD77, #E6E6FA);
+    color: #333;
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
-        .welcome-img {
-            max-width: 180px;
-            margin-bottom: 20px;
-        }
+.welcome-img {
+    max-width: 180px;
+    margin-bottom: 20px;
+}
 
-        .welcome-panel h1 {
-            margin-bottom: 10px;
-            font-size: 26px;
-        }
+.welcome-panel h1 {
+    margin-bottom: 10px;
+    font-size: 26px;
+}
 
-        .welcome-panel p {
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
+.welcome-panel p {
+    margin-bottom: 20px;
+    font-size: 14px;
+}
 
-        .ghost {
-            background-color: white;
-            color: #ff6a00;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
+.ghost {
+    background-color: #FFFDD0;
+    color: #77DD77;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
 
-        .ghost:hover {
-            background-color: #fff3e0;
-        }
-	        .password-wrapper {
-	    position: relative;
-	}
-	
-	.password-wrapper input {
-	    width: 100%;
-	    padding-right: 40px;
-	}
-	
-	.toggle-password {
-	    position: absolute;
-	    right: 10px;
-	    top: 50%;
-	    transform: translateY(-50%);
-	    cursor: pointer;
-	    user-select: none;
-	    font-size: 16px;
-	    color: #666;
-	}
-	.remember-me {
+.ghost:hover {
+    background-color: #E6E6FA;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+    font-size: 16px;
+    color: #666;
+}
+
+.remember-me {
     display: flex;
     align-items: center;
     gap: 8px;
     margin: 10px 0 20px;
     font-size: 14px;
     color: #555;
-	}
-	.remember-me input[type="checkbox"] {
-	    width: 16px;
-	    height: 16px;
-	    margin: 0 8px 0 0;
-	}
-	@media screen and (min-width: 1025px) {
+}
+
+.remember-me input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0 8px 0 0;
+}
+
+@media screen and (min-width: 1025px) {
     body {
         padding: 40px;
     }
@@ -176,11 +182,13 @@
         max-width: 150px;
     }
 
-    form h1, .welcome-panel h1 {
+    form h1,
+    .welcome-panel h1 {
         font-size: 26px;
     }
 
-    input, button {
+    input,
+    button {
         font-size: 16px;
         padding: 10px 14px;
     }
@@ -197,9 +205,8 @@
         font-size: 14px;
         padding: 10px 20px;
     }
-
-
-    </style>
+}
+  </style>  
 </head>
 <body>
     <div class="container">

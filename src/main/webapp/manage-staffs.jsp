@@ -1,43 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ page import="javax.servlet.http.HttpSession" %>
 <%@ include file="admin-header.jsp" %>
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Manage Staff</title>
     <style>
-        * {
+        :root {
+            --primary-color: #E2725B;
+            --secondary-color: #F5F5DC;
+            --accent1-color: #A0522D;
+            --accent2-color: #FFDAB9;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--secondary-color);
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
-        html, body {
-            height: 100%;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f4f7fa;
-        }
-
-        .grid-wrapper {
+        /* CRUD Card Styles */
+        .crud-section {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 60px;
-        }
-
-        .grid-row {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
             justify-content: center;
+            gap: 30px;
+            padding-top: 120px;
+            flex-wrap: wrap;
         }
 
-        .grid-card {
+        .crud-card {
             width: 220px;
             height: 220px;
-            background-color: white;
+            background-color: var(--accent2-color);
             border-radius: 20px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.1);
             display: flex;
@@ -45,90 +39,177 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            color: #333;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: var(--accent1-color);
+            transition: all 0.3s ease;
+            font-size: 40px;
         }
 
-        .grid-card:hover {
+        .crud-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
         }
 
-        .icon {
-            width: 50px;
-            height: 50px;
+        .crud-card h2 {
+            font-size: 18px;
+            margin-top: 15px;
+            text-align: center;
+            color: inherit;
+        }
+
+        /* Insights Section */
+        .insight-wrapper {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        .insight-wrapper h2 {
+            text-align: center;
+            color: var(--accent1-color);
+            margin-bottom: 30px;
+        }
+
+        .charts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        .chart-card {
+            flex: 1 1 480px;
+            background: var(--accent2-color);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .chart-card h3 {
+            text-align: center;
+            color: var(--accent1-color);
             margin-bottom: 15px;
         }
 
-        .grid-card h2 {
-            font-size: 18px;
-            font-weight: 600;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
         }
 
-        @media screen and (max-width: 768px) {
-            .grid-card {
+        th, td {
+            border: 1px solid var(--accent1-color);
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .crud-card {
                 width: 180px;
                 height: 180px;
+                font-size: 30px;
             }
 
-            .icon {
-                width: 40px;
-                height: 40px;
+            .crud-card h2 {
+                font-size: 14px;
             }
 
-            .grid-card h2 {
-                font-size: 16px;
+            .chart-card {
+                flex: 1 1 100%;
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
-<div class="grid-wrapper">
-    <div class="grid-row">
-        <!-- Create Staff -->
-        <a href="create-staff.jsp" class="grid-card">
-            <svg class="icon" fill="#3498db" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 
-                         10-4.48 10-10S17.52 2 12 2zm1 11h3v2h-3v3h-2v-3H8v-2h3V10h2v3z"/>
-            </svg>
-            <h2>Create Staff</h2>
-        </a>
+<!-- CRUD Cards -->
+<div class="crud-section">
+    <a href="create-staff.jsp" class="crud-card">👤➕<h2>Create Staff</h2></a>
+    <a href="viewStaff" class="crud-card">👁️‍🗨️<h2>View Staff</h2></a>
+    <a href="updateStaff.jsp" class="crud-card">✏️<h2>Update Staff</h2></a>
+    <a href="deleteStaff.jsp" class="crud-card">🗑️<h2>Delete Staff</h2></a>
+</div>
 
-        <!-- View Staff -->
-        <a href="viewStaff" class="grid-card">
-            <svg class="icon" fill="#27ae60" viewBox="0 0 24 24">
-                <path d="M12 6c-5 0-9 4.5-9 6s4 6 9 6 9-4.5 9-6-4-6-9-6zm0 10a4 4 0 1 1 
-                         0-8 4 4 0 0 1 0 8z"/>
-            </svg>
-            <h2>View Staff</h2>
-        </a>
-    </div>
+<!-- Staff Insights -->
+<div class="insight-wrapper">
+    <h2>Staff Insights</h2>
+    <div class="charts-container">
 
-    <div class="grid-row">
-        <!-- Update Staff -->
-        <a href="updateStaff.jsp" class="grid-card">
-            <svg class="icon" fill="#f39c12" viewBox="0 0 24 24">
-                <path d="M3 17.25V21h3.75l11-11.04-3.75-3.75L3 17.25zM20.71 
-                         7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 
-                         1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"/>
-            </svg>
-            <h2>Update Staff</h2>
-        </a>
+        <!-- Salary Chart -->
+        <div class="chart-card">
+            <h3>Staff Salary Distribution</h3>
+            <canvas id="staffSalaryChart"></canvas>
+            <table>
+                <tr><th>Salary Range</th><th>Staff Count</th></tr>
+                <tr><td>&lt; $2000</td><td>5</td></tr>
+                <tr><td>$2k - $4k</td><td>10</td></tr>
+                <tr><td>$4k - $6k</td><td>7</td></tr>
+                <tr><td>&gt; $6k</td><td>3</td></tr>
+            </table>
+        </div>
 
-        <!-- Delete Staff -->
-        <a href="deleteStaff.jsp" class="grid-card">
-            <svg class="icon" fill="#e74c3c" viewBox="0 0 24 24">
-                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 
-                         2-.9 2-2V7H6v12zm3.46-7.12L12 13.59l2.54-2.71 
-                         1.42 1.42L13.41 15l2.55 2.55-1.42 1.41L12 
-                         16.41l-2.55 2.55-1.41-1.41L10.59 15l-2.55-2.55 
-                         1.42-1.42zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/>
-            </svg>
-            <h2>Delete Staff</h2>
-        </a>
+        <!-- Shift Chart -->
+        <div class="chart-card">
+            <h3>Staff Shift Distribution</h3>
+            <canvas id="staffShiftChart"></canvas>
+            <table>
+                <tr><th>Shift</th><th>Staff Count</th></tr>
+                <tr><td>Morning</td><td>8</td></tr>
+                <tr><td>Afternoon</td><td>10</td></tr>
+                <tr><td>Night</td><td>7</td></tr>
+            </table>
+        </div>
+
     </div>
 </div>
+
+<!-- Chart JS Logic -->
+<script>
+    new Chart(document.getElementById('staffSalaryChart'), {
+        type: 'bar',
+        data: {
+            labels: ['< $2000', '$2k - $4k', '$4k - $6k', '> $6k'],
+            datasets: [{
+                label: 'Staff',
+                data: [5, 10, 7, 3],
+                backgroundColor: 'rgba(153, 102, 255, 0.7)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1,
+                borderRadius: 5
+            }]
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true }
+            },
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('staffShiftChart'), {
+        type: 'pie',
+        data: {
+            labels: ['Morning', 'Afternoon', 'Night'],
+            datasets: [{
+                data: [8, 10, 7],
+                backgroundColor: [
+                    'rgba(255, 159, 64, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 205, 86, 0.7)'
+                ]
+            }]
+        }
+    });
+</script>
 
 </body>
 </html>

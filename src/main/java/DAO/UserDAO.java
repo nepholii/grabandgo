@@ -2,14 +2,18 @@ package DAO;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import Model.User;
 import security.PasswordUtils;
 import Database.DatabaseConnection;
 
 public class UserDAO {
-
+	
+	
     public boolean registerUser(User user) throws ClassNotFoundException {
         String checkQuery = "SELECT COUNT(*) FROM users WHERE username = ?";
         String insertQuery = "INSERT INTO users (first_name, last_name, username, phone, email, password, address, gender, role, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -267,7 +271,42 @@ public class UserDAO {
         }
     }
 
+    
+    public static int getUserCountByLocation(String location) {
+        int count = 0;
+        try {
+            Connection con = DatabaseConnection.getConnection();
+            String query = "SELECT COUNT(*) FROM users WHERE address = ? AND role = 'Customer'";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, location);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 
+    public static int getUserCountByGender(String gender) {
+        int count = 0;
+        try {
+            Connection con = DatabaseConnection.getConnection();
+            String query = "SELECT COUNT(*) FROM users WHERE gender = ? AND role = 'Customer'";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, gender);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 
 
 

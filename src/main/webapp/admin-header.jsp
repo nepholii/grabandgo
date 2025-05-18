@@ -3,7 +3,7 @@
 <%
     String loggedInAdmin = (String) session.getAttribute("username");
 %>
-/* Admin Header Styling */
+
 <style>
 .navbar {
     position: fixed;
@@ -11,18 +11,20 @@
     left: 0;
     width: 100%;
     height: 60px;
-    background-color: #1e1e1e;
+    background-color: #F5F5DC; /* Creamy Beige */
     z-index: 999;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+    border-bottom: 2px solid #FFDAB9; /* Soft Peach */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 a.logo {
     font-size: 28px;
     font-weight: bold;
-    color: #FFCC00;
+    color: #E2725B; /* Warm Terracotta */
     text-decoration: none;
 }
 
@@ -35,14 +37,14 @@ a.logo {
 }
 
 .nav-links li a {
-    color: white;
+    color: #333;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .nav-links li a:hover {
-    color: #FFCC00;
+    color: #A0522D; /* Toasted Brown */
 }
 
 .nav-right {
@@ -67,11 +69,12 @@ a.logo {
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
+    border: 2px solid #FFDAB9; /* Soft Peach border */
 }
 
 .profile-name {
     margin-left: 10px;
-    color: #FFCC00;
+    color: #A0522D; /* Toasted Brown */
     font-weight: 600;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -102,12 +105,13 @@ a.logo {
     }
 }
 </style>
+
 <header class="navbar">
-    <a href="admin-dashboard.jsp" class="logo">Grab & Go </a>
+    <a href="admin-dashboard.jsp" class="logo">Grab & Go</a>
     <nav>
         <ul class="nav-links">
             <li><a href="admin-dashboard.jsp">Dashboard</a></li>
-            <li><a href="manage-users.jsp">Users</a></li>
+            <li><a href="manage-users.jsp">Customers</a></li>
             <li><a href="manage-staffs.jsp">Staff</a></li>
             <li><a href="manage-products.jsp">Products</a></li>
         </ul>

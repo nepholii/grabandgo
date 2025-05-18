@@ -9,7 +9,6 @@
     int productCount = 320;
 %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,11 +17,16 @@
         body {
             font-family: 'Segoe UI', sans-serif;
             margin: 0;
-            background: #f4f7fa;
+            background: #F5F5DC; /* Creamy Beige */
         }
 
         .dashboard-container {
             padding: 100px 20px 20px 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #A0522D; /* Toasted Brown */
         }
 
         .card-row {
@@ -35,32 +39,52 @@
         .card {
             flex: 1;
             min-width: 200px;
-            background: white;
-            border-radius: 10px;
+            background: #FFDAB9; /* Soft Peach */
+            border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
+            transition: transform 0.3s ease;
         }
 
-        .card i {
-            font-size: 24px;
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card div {
+            font-size: 40px;
             margin-bottom: 10px;
-            display: block;
+        }
+
+        .card h3 {
+            color: #E2725B; /* Warm Terracotta */
+            font-size: 28px;
+            margin: 0;
+        }
+
+        .card p {
+            color: #333;
+            font-weight: 500;
         }
 
         .chart-section {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-            margin-top: 20px;
-            width: 100%;
-        }
+        background: #FFF8E7; /* Lightened cream for contrast */
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        width: 100%;
+        max-width: 900px;      /* fix overflow */
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-        h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
+    .chart-section canvas {
+        width: 100% !important;
+        height: 300px !important;
+        display: block;
+    }
+        
 
         @media screen and (min-width: 1280px) and (max-width: 1920px) {
             .dashboard-container {
@@ -76,28 +100,26 @@
 <div class="dashboard-container">
     <h2>Dashboard</h2>
 
-   
     <!-- Stat Cards -->
-<div class="card-row">
-    <div class="card">
-        <div style="font-size: 40px; margin-bottom: 10px;">👥</div>
-        <h3><%= customerCount %></h3>
-        <p>Customers</p>
-    </div>
+    <div class="card-row">
+        <div class="card">
+            <div>👥</div>
+            <h3><%= customerCount %></h3>
+            <p>Customers</p>
+        </div>
 
-    <div class="card">
-        <div style="font-size: 40px; margin-bottom: 10px;">🧑‍💼</div>
-        <h3><%= staffCount %></h3>
-        <p>Staff</p>
-    </div>
+        <div class="card">
+            <div>🧑‍💼</div>
+            <h3><%= staffCount %></h3>
+            <p>Staff</p>
+        </div>
 
-    <div class="card">
-        <div style="font-size: 40px; margin-bottom: 10px;">🍔</div>
-        <h3><%= productCount %></h3>
-        <p>Products</p>
+        <div class="card">
+            <div>🍔</div>
+            <h3><%= productCount %></h3>
+            <p>Products</p>
+        </div>
     </div>
-</div>
-    
 
     <!-- Orders Chart -->
     <div class="chart-section">
@@ -117,8 +139,8 @@
             datasets: [{
                 label: 'Orders Placed',
                 data: [30, 45, 28, 50, 40, 60, 75],
-                borderColor: '#3498db',
-                backgroundColor: 'rgba(52,152,219,0.1)',
+                borderColor: '#E2725B', // Warm Terracotta
+                backgroundColor: 'rgba(226, 114, 91, 0.2)', // transparent fill
                 fill: true,
                 tension: 0.4
             }]
