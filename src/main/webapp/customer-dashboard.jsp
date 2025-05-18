@@ -228,7 +228,7 @@
     <h2 class="section-title">Today's Special</h2>
     <div class="menu-grid">
         <a href="item-details.jsp?name=Spicy%20Wings&price=8&desc=Hot%20and%20spicy%20chicken%20wings%20with%20ranch%20dip.&image=images/spicy%20wings.jpg" class="menu-item">
-            <img src="images/spicy wings.jpg" alt="Spicy Wings">
+            <img src="images/spicy-wings.jpg" alt="Spicy Wings">
             <h3>Spicy Wings</h3>
             <p>Hot and spicy chicken wings with ranch dip.</p>
             <span class="price">$8</span>
@@ -280,7 +280,7 @@
     <h2 class="section-title">Chef’s Specials</h2>
     <div class="menu-grid">
         <a href="item-details.jsp?name=Spicy%20Wings&price=8&desc=Hot%20and%20spicy%20chicken%20wings%20with%20ranch%20dip.&image=images/spicy%20wings.jpg" class="menu-item">
-            <img src="images/spicy wings.jpg" alt="Spicy Wings">
+            <img src="images/spicy-wings.jpg" alt="Spicy Wings">
             <h3>Spicy Wings</h3>
             <p>Hot and spicy chicken wings with ranch dip.</p>
             <span class="price">$8</span>

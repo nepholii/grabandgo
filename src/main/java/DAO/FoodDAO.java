@@ -84,5 +84,23 @@ public class FoodDAO {
 	        throw new Exception("No food found with ID: " + foodId);
 	    }
 	}
+	public boolean insertFood(Food food) throws SQLException, ClassNotFoundException {
+	    String sql = "INSERT INTO food (food_name, food_description, food_price, category, quantity, preparation_time, image_path) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+	    try (Connection conn = DatabaseConnection.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	        stmt.setString(1, food.getFoodName());
+	        stmt.setString(2, food.getFoodDescription());
+	        stmt.setDouble(3, food.getFoodPrice());
+	        stmt.setString(4, food.getCategory());
+	        stmt.setInt(5, food.getQuantity());
+	        stmt.setTime(6, java.sql.Time.valueOf(food.getPreparationTime())); // format: HH:mm:ss
+	        stmt.setString(7, food.getImagePath());
+
+	        return stmt.executeUpdate() > 0;
+	    }
+	}
+
 }
 
