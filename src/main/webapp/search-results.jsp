@@ -93,7 +93,7 @@
                 </c:forEach>
             </c:when>
             <c:otherwise>
-                <p>no food xainw "<strong>${searchKeyword}</strong>".</p>
+                <p>No food items found for "<strong>${searchKeyword}</strong>".</p>
             </c:otherwise>
         </c:choose>
     </div>
