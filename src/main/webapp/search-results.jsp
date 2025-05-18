@@ -93,7 +93,7 @@
                 </c:forEach>
             </c:when>
             <c:otherwise>
-                <p>Hello Nischay "<strong>${searchKeyword}</strong>".</p>
+                <p>Hello Prabesh"<strong>${searchKeyword}</strong>".</p>
             </c:otherwise>
         </c:choose>
     </div>
