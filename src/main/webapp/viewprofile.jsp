@@ -159,9 +159,10 @@
 
     <div class="profile-container">
         <h2>Your Profile</h2>
-        <img src="images/profile.png" alt="Profile Picture" class="profile-pic">
-
-
+        
+        <c:set var="imageFile" value="${sessionScope.image}"/>
+        <c:set var="imagePath" value="${not empty imageFile ? 'uploaded_images/' : 'images/'}${not empty imageFile ? imageFile : 'profile.png'}"/>
+        <img src="${imagePath}" alt="Profile Picture" class="profile-pic">
         
         <div class="profile-info">
             <div>
@@ -206,7 +207,7 @@
     </div>
 
     <footer class="footer">
-	    <p>&copy; 2025 Grab & Go. All rights reserved.</p>
-	</footer>
+        <p>&copy; 2025 Grab & Go. All rights reserved.</p>
+    </footer>
 </body>
 </html>
