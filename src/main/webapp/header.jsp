@@ -137,37 +137,48 @@
 
 <header class="navbar">
     <a href="customer-dashboard.jsp" class="logo">Grab & Go</a>
-    <nav>
-        <ul class="nav-links">
-            <li><a href="customer-dashboard.jsp">Home</a></li>
-            <li><a href="MenuServlet">Menu</a></li>
-            <li><a href="cart.jsp">Cart</a></li>
-            <li><a href="aboutus.jsp">About us</a></li>
-        </ul>
-    </nav>
+  
+<nav>
+    <ul class="nav-links">
+        <li><a href="customer-dashboard.jsp">Home</a></li>
+        <li><a href="MenuServlet">Menu</a></li>
+        <li><a href="orderhistory.jsp">Order History</a></li> <!-- ✅ Replaced Cart with Order History -->
+        <li><a href="aboutus.jsp">About us</a></li>
+    </ul>
+</nav>
 
-    <div class="nav-right">
-        <form action="SearchFoodServelet" method="post">
-            <input type="text" name="search" class="search-bar" placeholder="Search food..." required />
-        </form>
 
-        <div id="profileContainer" class="profile-info">
-		    <% 
-		        String imageFile = (String) session.getAttribute("image");
-		        String imagePath = (imageFile != null) ? "uploaded_images/" + imageFile : "images/profile.png";
-		    %>
-		    <img src="<%= imagePath %>" alt="User" class="profile-img" id="profileImg">
-		    <% if (loggedInUser != null) { %>
-		        <span class="profile-name"><%= loggedInUser %></span>
-		    <% } %>
-		</div>
+<div class="nav-right">
+  <a href="cart.jsp" title="Cart" style="color: white; font-size: 20px;">
+            <i class="fas fa-shopping-cart"></i>
+        </a>
+   
+    <form action="SearchFoodServelet" method="post" style="display: flex; align-items: center; gap: 15px;">
+        <input type="text" name="search" class="search-bar" placeholder="Search food..." required />
 
-        <div class="dropdown-menu" id="dropdownMenu">
-            <a href="viewprofile.jsp">View Profile</a>
-            <a href="orderhistory.jsp">Order History</a>
-            <a href="LogoutServlet">Logout</a>
-        </div>
+        
+      
+    </form>
+
+   
+    <div id="profileContainer" class="profile-info">
+        <%
+            String imageFile = (String) session.getAttribute("image");
+            String imagePath = (imageFile != null) ? "uploaded_images/" + imageFile : "images/profile.png";
+        %>
+        <img src="<%= imagePath %>" alt="User" class="profile-img" id="profileImg">
+        <% if (loggedInUser != null) { %>
+            <span class="profile-name"><%= loggedInUser %></span>
+        <% } %>
     </div>
+
+    
+    <div class="dropdown-menu" id="dropdownMenu">
+        <a href="viewprofile.jsp"><i class="fas fa-user"></i> View Profile</a>
+        <a href="LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+</div>
+
 </header>
 
 <script>
