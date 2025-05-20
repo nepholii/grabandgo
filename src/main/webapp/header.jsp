@@ -174,10 +174,12 @@
 
     
     <div class="dropdown-menu" id="dropdownMenu">
-        <a href="viewprofile.jsp"><i class="fas fa-user"></i> View Profile</a>
-        <a href="LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
-    </div>
+    <a href="viewprofile.jsp"><i class="fas fa-user"></i> View Profile</a>
+    <a href="edit-profile.jsp"><i class="fas fa-edit"></i> Edit Profile</a> 
+    <a href="LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
 </div>
+    </div>
+
 
 </header>
 
