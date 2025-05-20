@@ -12,6 +12,7 @@ public class User {
     private String gender; // Male, Female, Other
     private String role;   // Admin, Staff, Customer
     private String status; // Active, Inactive
+    private String image_path;
 
     // ✅ Default Constructor
     public User() {}
@@ -19,7 +20,7 @@ public class User {
     // ✅ Parameterized Constructor
     public User(int id, String firstName, String lastName, String username, String phone,
                 String email, String password, String address, String gender,
-                String role, String status) {
+                String role, String status, String image_path) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -66,4 +67,8 @@ public class User {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    
+    public String getImage() {return image_path;}
+    public void setImage(String image_path) {this.image_path = image_path;}
+        
 }

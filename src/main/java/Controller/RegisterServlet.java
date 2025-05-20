@@ -1,7 +1,11 @@
 package Controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
@@ -9,6 +13,9 @@ import DAO.UserDAO;
 import Model.User;
 
 @WebServlet("/RegisterServlet")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+maxFileSize = 1024 * 1024 * 10,      // 10MB
+maxRequestSize = 1024 * 1024 * 50)   // 50MB
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -25,11 +32,24 @@ public class RegisterServlet extends HttpServlet {
         String status = "Active"; // default
 
         // ✅ Basic input validation
-        if (username.length() < 5 || password.length() < 6) {
+        if (username == null || password == null || username.length() < 5 || password.length() < 6) {
             response.sendRedirect("register.jsp?error=Username must be at least 5 characters and password at least 6 characters");
             return;
         }
 
+        // ✅ Handle profile image
+        Part filePart = request.getPart("image");  // "image" is the name attribute in your input file field
+
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+        String uploadPath = getServletContext().getRealPath("/uploaded_images");
+        System.out.println("Upload folder path: " + uploadPath);
+
+        File uploadDir = new File(uploadPath);
+        
+        if (!uploadDir.exists()) uploadDir.mkdir();  // Create folder if doesn't exist
+
+        filePart.write(uploadPath + File.separator + fileName);
+        
         // ✅ Create User object
         User user = new User();
         user.setFirstName(firstName);
@@ -42,6 +62,7 @@ public class RegisterServlet extends HttpServlet {
         user.setGender(gender);
         user.setRole(role);
         user.setStatus(status);
+        user.setImage(fileName);
 
         // ✅ Register using DAO
         try {

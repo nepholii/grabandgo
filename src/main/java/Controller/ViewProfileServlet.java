@@ -25,6 +25,7 @@ public class ViewProfileServlet extends HttpServlet {
             User user = userDAO.getUserById(userId);
             
             if (user != null) {
+            	session.setAttribute("user", user);
                 request.setAttribute("user", user);
                 request.getRequestDispatcher("viewprofile.jsp").forward(request, response);
             } else {
@@ -32,7 +33,7 @@ public class ViewProfileServlet extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("error.jsp?message=Error retrieving profile");
+            response.sendRedirect("login.jsp?error=Unexpected error occurred");
         }
     }
 }

@@ -31,6 +31,10 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("username", user.getUsername());
             session.setAttribute("role", user.getRole());
             session.setMaxInactiveInterval(15 * 60);  // 15 minutes
+            
+            session.setAttribute("image", user.getImage());//change
+            System.out.println("Logged in user image: " + user.getImage());
+
 
        
             Cookie usernameCookie = new Cookie("username", user.getUsername());

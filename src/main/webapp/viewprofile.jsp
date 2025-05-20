@@ -160,6 +160,8 @@
     <div class="profile-container">
         <h2>Your Profile</h2>
         <img src="images/profile.png" alt="Profile Picture" class="profile-pic">
+
+
         
         <div class="profile-info">
             <div>

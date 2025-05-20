@@ -87,6 +87,25 @@ form h1 {
     color: #333;
     text-align: center;
 }
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+    font-size: 16px;
+    color: #666;
+}
 
 input, select, textarea {
     margin-bottom: 12px;
@@ -203,7 +222,12 @@ button:hover {
                 <input type="text" name="username" required placeholder="Username">
                 <input type="email" name="email" required placeholder="Email">
                 <input type="tel" name="phone" pattern="[0-9]{10}" title="10 digit phone number" required placeholder="Phone Number">
-                <input type="password" name="password" required placeholder="Password">
+                
+                <div class="password-wrapper">
+			    <input type="password" name="password" id="password" placeholder="Password" required>
+			    <span class="toggle-password" onclick="togglePassword()">👀</span>
+                </div>
+                
                 <input name="address" placeholder="Address" required></input>
 
                 <select name="gender" required>
@@ -213,13 +237,31 @@ button:hover {
                     <option value="Other">Other</option>
                 </select>
                  <div class="file-input">
-                    <label class="file-label" for="image">Upload Profile Image</label>
-                    <input type="file" name="image" id="image" accept="image/*" required>
-                </div>
+				    <label class="file-label" for="image">Upload Profile Image <span id="tick" style="display:none;">✅</span></label>
+				    <input type="file" name="image" id="image" accept="image/*" required onchange="showTick()">
+				</div>
 
                 <button type="submit">Register</button>
             </form>
         </div>
     </div>
+    
+     <script>
+    function togglePassword() {
+        const passwordField = document.getElementById("password");
+        const type = passwordField.type === "password" ? "text" : "password";
+        passwordField.type = type;
+    }
+    
+    function showTick() {
+        const input = document.getElementById("image");
+        const tick = document.getElementById("tick");
+        if (input.files.length > 0) {
+            tick.style.display = "inline";
+        } else {
+            tick.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>

@@ -16,7 +16,7 @@ public class UserDAO {
 	
     public boolean registerUser(User user) throws ClassNotFoundException {
         String checkQuery = "SELECT COUNT(*) FROM users WHERE username = ?";
-        String insertQuery = "INSERT INTO users (first_name, last_name, username, phone, email, password, address, gender, role, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO users (first_name, last_name, username, phone, email, password, address, gender, role, status, image_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
@@ -43,6 +43,7 @@ public class UserDAO {
             insertStmt.setString(8, user.getGender());
             insertStmt.setString(9, user.getRole());
             insertStmt.setString(10, user.getStatus());
+            insertStmt.setString(11, user.getImage());
 
             int rowsInserted = insertStmt.executeUpdate();
             System.out.println(" Registration Successful. Rows Inserted: " + rowsInserted);
@@ -83,6 +84,7 @@ public class UserDAO {
                     user.setGender(rs.getString("gender"));
                     user.setRole(rs.getString("role"));
                     user.setStatus(rs.getString("status"));
+                    user.setImage(rs.getString("image_path"));
 
                     return user;
                 }
