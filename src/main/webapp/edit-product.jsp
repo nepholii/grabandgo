@@ -44,7 +44,8 @@
 
     input[type="text"],
     input[type="number"],
-    textarea {
+    textarea,
+    select {
       padding: 10px;
       font-size: 15px;
       border: 1px solid #ccc;
@@ -89,6 +90,20 @@
       color: #E2725B;
       font-weight: bold;
     }
+
+    /* Styling the Category label specifically */
+    label[for="category"] {
+     
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    /* Styling the Category select input specifically */
+    select#category {
+      background-color: #FFF8F0;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -118,7 +133,15 @@
 
     <div class="form-group">
       <label for="category">Category:</label>
-      <input type="text" id="category" name="category" value="${food.category}" />
+      <select id="category" name="category" required>
+        <option value="">-- Select Category --</option>
+        <option value="Main Course" ${food.category == 'Main Course' ? 'selected' : ''}>Main Course</option>
+        <option value="Dessert" ${food.category == 'Dessert' ? 'selected' : ''}>Dessert</option>
+        <option value="Appetizer" ${food.category == 'Appetizer' ? 'selected' : ''}>Appetizer</option>
+        <option value="Beverage" ${food.category == 'Beverage' ? 'selected' : ''}>Beverage</option>
+        <option value="Salad" ${food.category == 'Salad' ? 'selected' : ''}>Salad</option>
+        <option value="Soup" ${food.category == 'Soup' ? 'selected' : ''}>Soup</option>
+      </select>
     </div>
 
     <div class="form-group">
@@ -138,8 +161,6 @@
 
     <button type="submit">Update Product</button>
   </form>
-
- 
 </div>
 
 </body>

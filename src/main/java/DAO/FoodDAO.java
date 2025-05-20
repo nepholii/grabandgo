@@ -109,6 +109,47 @@ public class FoodDAO {
 	        return stmt.executeUpdate() > 0;
 	    }
 	}
+	public boolean updateFood(Food food) {
+	    boolean updated = false;
+
+	    String sql = "UPDATE food SET food_name = ?, food_description = ?, food_price = ?, category = ?, quantity = ?, preparation_time = ?, image_path = ? WHERE food_id = ?";
+
+	    try (Connection conn = DatabaseConnection.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	        stmt.setString(1, food.getFoodName());
+	        stmt.setString(2, food.getFoodDescription());
+	        stmt.setDouble(3, food.getFoodPrice());
+	        stmt.setString(4, food.getCategory());
+	        stmt.setInt(5, food.getQuantity());
+
+	        // ✅ Handle TIME format correctly
+	        String prepTime = food.getPreparationTime();
+	        if (prepTime == null || prepTime.trim().isEmpty()) {
+	            stmt.setNull(6, java.sql.Types.TIME);
+	        } else {
+	            // Ensure it has HH:mm:ss format
+	            if (prepTime.matches("^\\d{2}:\\d{2}$")) {
+	                prepTime += ":00"; // convert "HH:mm" to "HH:mm:ss"
+	            }
+	            stmt.setTime(6, java.sql.Time.valueOf(prepTime));
+	        }
+
+	        stmt.setString(7, food.getImagePath());
+	        stmt.setInt(8, food.getFoodId());
+
+	        int rowsAffected = stmt.executeUpdate();
+	        updated = rowsAffected > 0;
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return updated;
+	}
+
+
+
 
 
 }

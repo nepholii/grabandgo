@@ -33,21 +33,35 @@
             color: #444444;
         }
 
+        /* Specific style for category label */
+        label[for="category"] {
+            
+            font-weight: 600;
+            font-size: 16px;
+        }
+
         input[type="text"],
         input[type="number"],
         input[type="file"],
-        textarea {
+        textarea,
+        select {
             width: 100%;
             padding: 12px;
             border: 1px solid #ced4da;
             border-radius: 10px;
             font-size: 15px;
             box-sizing: border-box;
+            background-color: #FFF8F0;
         }
 
         textarea {
             resize: vertical;
             min-height: 100px;
+        }
+
+        select#category {
+            background-color: #FFF8F0;
+            color: #333;
         }
 
         input[type="submit"] {
@@ -91,10 +105,8 @@
     </style>
 </head>
 <body>
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br>
+
 <!-- Display success or error message using URL parameter -->
 <c:if test="${param.status == 'success'}">
     <div class="success-message">Product created successfully!</div>
@@ -102,6 +114,7 @@
 <c:if test="${param.status == 'error'}">
     <div class="error-message">Error occurred while creating the product.</div>
 </c:if>
+
 <form action="CreateProductServlet" method="post" enctype="multipart/form-data">
     <h2>Create New Product</h2>
 
@@ -115,7 +128,15 @@
     <input type="number" name="food_price" id="food_price" step="0.01" required>
 
     <label for="category">Category</label>
-    <input type="text" name="category" id="category" required>
+    <select name="category" id="category" required>
+        <option value="">-- Select Category --</option>
+        <option value="Main Course">Main Course</option>
+        <option value="Dessert">Dessert</option>
+        <option value="Appetizer">Appetizer</option>
+        <option value="Beverage">Beverage</option>
+        <option value="Salad">Salad</option>
+        <option value="Soup">Soup</option>
+    </select>
 
     <label for="quantity">Quantity</label>
     <input type="number" name="quantity" id="quantity" required>
