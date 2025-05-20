@@ -105,7 +105,7 @@
         </a>
 
         <!-- View Product -->
-        <a href="view-product.jsp" class="grid-card">
+        <a href="view-product" class="grid-card">
             <div class="emoji-icon">👁️</div>
             <h2>View Product</h2>
         </a>

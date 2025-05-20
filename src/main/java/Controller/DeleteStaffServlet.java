@@ -33,7 +33,7 @@ public class DeleteStaffServlet extends HttpServlet {
         }
 
         // Redirect back to delete-staff.jsp to show updated list
-        response.sendRedirect("delete-staff.jsp");
+        response.sendRedirect("deleteStaff.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

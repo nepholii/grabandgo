@@ -11,7 +11,7 @@ import Database.DatabaseConnection;
 public class FoodDAO {
 	public List<Food> getAllAvailableFoodItems() throws SQLException, ClassNotFoundException {
         List<Food> foodItems = new ArrayList<>();
-        String sql = "SELECT * FROM Food WHERE quantity > 0 ORDER BY category, food_name";
+        String sql = "SELECT * FROM food WHERE quantity > 0 ORDER BY food_id, food_name";
 
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
@@ -101,6 +101,15 @@ public class FoodDAO {
 	        return stmt.executeUpdate() > 0;
 	    }
 	}
+	public boolean deleteFoodById(int foodId) throws SQLException, ClassNotFoundException {
+	    String sql = "DELETE FROM food WHERE food_id = ?";
+	    try (Connection conn = DatabaseConnection.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        stmt.setInt(1, foodId);
+	        return stmt.executeUpdate() > 0;
+	    }
+	}
+
 
 }
 
