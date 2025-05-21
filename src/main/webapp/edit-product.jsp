@@ -50,10 +50,31 @@
       <input type="number" id="quantity" name="quantity" value="${food.quantity}" />
     </div>
 
-    <div class="form-group">
-      <label for="preparationTime">Preparation Time:</label>
-      <input type="text" id="preparationTime" name="preparationTime" value="${food.preparationTime}" />
-    </div>
+   <div class="form-group">
+  <label for="preparationTime">Preparation Time:</label>
+  <div style="display: flex; gap: 10px;">
+    <select name="prepHour" id="prepHour" required>
+      <option value="">HH</option>
+      <c:forEach var="h" begin="0" end="12">
+        <option value="${h}" ${food.preparationHour == h ? 'selected' : ''}>${h}</option>
+      </c:forEach>
+    </select>
+
+    <select name="prepMinute" id="prepMinute" required>
+      <option value="">MM</option>
+      <c:forEach var="m" begin="0" end="59">
+        <option value="${m}" ${food.preparationMinute == m ? 'selected' : ''}>${m}</option>
+      </c:forEach>
+    </select>
+
+    <select name="prepSecond" id="prepSecond" required>
+      <option value="">SS</option>
+      <c:forEach var="s" begin="0" end="59">
+        <option value="${s}" ${food.preparationSecond == s ? 'selected' : ''}>${s}</option>
+      </c:forEach>
+    </select>
+  </div>
+</div>
 
     <div class="form-group">
       <label for="imagePath">Image Path:</label>

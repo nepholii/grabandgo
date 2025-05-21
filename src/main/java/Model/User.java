@@ -70,5 +70,8 @@ public class User {
     
     public String getImage() {return image_path;}
     public void setImage(String image_path) {this.image_path = image_path;}
+    
+
+
         
 }

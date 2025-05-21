@@ -58,8 +58,17 @@
             <option value="Other" <%= "Other".equals(user.getGender()) ? "selected" : "" %>>Other</option>
         </select>
 
-        <label>Address</label>
-        <input type="text" name="address" value="<%= user.getAddress() %>">
+       <label>Address</label>
+<select name="address" id="address" required>
+    <option value="" disabled <%= user.getAddress() == null || user.getAddress().isEmpty() ? "selected" : "" %>>Select Address</option>
+    <option value="Kathmandu" <%= "Kathmandu".equals(user.getAddress()) ? "selected" : "" %>>Kathmandu</option>
+    <option value="Lalitpur" <%= "Lalitpur".equals(user.getAddress()) ? "selected" : "" %>>Lalitpur</option>
+    <option value="Bhaktapur" <%= "Bhaktapur".equals(user.getAddress()) ? "selected" : "" %>>Bhaktapur</option>
+    <option value="Pokhara" <%= "Pokhara".equals(user.getAddress()) ? "selected" : "" %>>Pokhara</option>
+    <option value="Biratnagar" <%= "Biratnagar".equals(user.getAddress()) ? "selected" : "" %>>Biratnagar</option>
+    <option value="Others" <%= "Others".equals(user.getAddress()) ? "selected" : "" %>>Others</option>
+</select>
+       
 
         <label>Status</label>
         <select name="status">
