@@ -61,9 +61,7 @@
 	    </form>
 	</div>
 
-    <footer class="footer">
-	    <p>&copy; 2025 Grab & Go. All rights reserved.</p>
-	</footer>
+  <%@ include file="footer.jsp" %>
 
 </body>
 </html>

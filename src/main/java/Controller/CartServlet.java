@@ -58,14 +58,17 @@ public class CartServlet extends HttpServlet {
             return;
         }
 
-
         try {
             Cart cart = (Cart) session.getAttribute("cart");
+
             if (cart == null) {
                 cart = cartDAO.getCart(customerId);
                 if (cart == null) {
-                    response.sendRedirect("cart");
-                    return;
+                    // Create a new cart
+                    int cartId = cartDAO.createCart(customerId);
+                    cart = new Cart();
+                    cart.setCartId(cartId);
+                    cart.setCustomerId(customerId);
                 }
             }
 
@@ -76,18 +79,18 @@ public class CartServlet extends HttpServlet {
                     String foodName = request.getParameter("foodName");
                     double price = Double.parseDouble(request.getParameter("price"));
                     int quantity = Integer.parseInt(request.getParameter("quantity"));
-                    
+
                     CartItem item = new CartItem(foodId, foodName, price, quantity);
                     cartDAO.addOrUpdateItem(cart.getCartId(), item);
                     cart.addItem(item);
                     break;
-                    
+
                 case "update":
                     int newQuantity = Integer.parseInt(request.getParameter("quantity"));
                     cartDAO.updateItem(cart.getCartId(), foodId, newQuantity);
                     cart.updateItemQuantity(foodId, newQuantity);
                     break;
-                    
+
                 case "remove":
                     cartDAO.removeItem(cart.getCartId(), foodId);
                     cart.removeItem(foodId);
@@ -96,9 +99,10 @@ public class CartServlet extends HttpServlet {
 
             session.setAttribute("cart", cart);
             response.sendRedirect("cart");
-            
+
         } catch (SQLException | NumberFormatException | ClassNotFoundException e) {
             throw new ServletException("Cart operation failed", e);
         }
     }
+
 }

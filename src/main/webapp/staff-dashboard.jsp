@@ -1,20 +1,26 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="DAO.OrderModelDAO" %>
+
 <%
     String loggedInStaff = (String) session.getAttribute("username");
 
-    int placedOrders = 50;
-    int preparingOrders = 25;
-    int completedOrders = 75;
+    // Retrieve counts from the DAO
+    int totalOrders = OrderModelDAO.getTotalOrdersCount();
+    int preparingOrders = OrderModelDAO.getPreparingOrdersCount();
+    int completedOrders = OrderModelDAO.getCompletedOrdersCount();
+    int pendingOrders = OrderModelDAO.getPendingOrdersCount();
+    int readyOrders = OrderModelDAO.getReadyOrdersCount();
+
+    
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Staff Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="css/staff-dashboard.css">
+    <link rel="stylesheet" href="css/staff-dashboard.css">
+     
 </head>
 <body>
 
@@ -23,8 +29,9 @@
     <nav>
         <ul class="nav-links">
             <li><a href="staff-dashboard.jsp">Dashboard</a></li>
-            <li><a href="manage-orders.jsp">Orders</a></li>
-            <li><a href="menu.jsp">Menu</a></li>
+            <li><a href="manage-orders">Orders</a></li>
+            <li style="margin-left: 60px;"><a href="LogoutServlet">Logout</a></li>
+            
         </ul>
     </nav>
 
@@ -34,7 +41,9 @@
             <% if (loggedInStaff != null) { %>
                 <span class="profile-name"><%= loggedInStaff %></span>
             <% } %>
+     
         </div>
+        
     </div>
 </header>
 
@@ -45,8 +54,8 @@
     <div class="card-row">
         <div class="card">
             <i class="fas fa-clipboard-list"></i>
-            <h3><%= placedOrders %></h3>
-            <p>Placed Orders</p>
+            <h3><%= totalOrders %></h3>
+            <p>Total Orders</p>
         </div>
         <div class="card">
             <i class="fas fa-hourglass-half"></i>
@@ -58,13 +67,24 @@
             <h3><%= completedOrders %></h3>
             <p>Completed Orders</p>
         </div>
+        <div class="card">
+            <i class="fas fa-clock"></i>
+            <h3><%= pendingOrders %></h3>
+            <p>Pending Orders</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-check-circle"></i>
+            <h3><%= readyOrders %></h3>
+            <p>Ready Orders</p>
+        </div>
     </div>
+    
+ </div>
 
-    <!-- Order Status Chart -->
-    <div class="chart-section">
-        <h2>Order Status Over Time</h2>
-        <canvas id="orderStatusChart" height="300"></canvas>
-    </div>
+   <!-- Order Status Chart -->
+<div class="chart-section">
+    <h2>Order Status Distribution</h2>
+    <canvas id="orderStatusChart"></canvas>
 </div>
 
 <!-- Chart.js -->
@@ -72,51 +92,51 @@
 <script>
     const ctx = document.getElementById('orderStatusChart').getContext('2d');
     const orderStatusChart = new Chart(ctx, {
-        type: 'line',
+        type: 'pie',
         data: {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            datasets: [
-                {
-                    label: 'Placed Orders',
-                    data: [10, 15, 12, 18, 14, 20, 25],
-                    borderColor: '#e67e22',
-                    backgroundColor: 'rgba(230, 126, 34, 0.1)',
-                    fill: true,
-                    tension: 0.4
-                },
-                {
-                    label: 'Preparing Orders',
-                    data: [5, 8, 7, 6, 10, 12, 9],
-                    borderColor: '#f1c40f',
-                    backgroundColor: 'rgba(241, 196, 15, 0.1)',
-                    fill: true,
-                    tension: 0.4
-                },
-                {
-                    label: 'Completed Orders',
-                    data: [8, 10, 15, 12, 18, 22, 30],
-                    borderColor: '#2ecc71',
-                    backgroundColor: 'rgba(46, 204, 113, 0.1)',
-                    fill: true,
-                    tension: 0.4
-                }
-            ]
+            labels: ['Preparing Orders', 'Completed Orders', 'Pending Orders', 'Ready Orders'],
+            datasets: [{
+                label: 'Order Status Distribution',
+                data: [<%= preparingOrders %>, <%= completedOrders %>, <%= pendingOrders %>, <%= readyOrders %>],
+                backgroundColor: [
+                    '#A3D8FF',  // Preparing Orders (Pastel Blue)
+                    '#A9E5A1',  // Completed Orders (Pastel Green)
+                    '#C7A0FF',  // Pending Orders (Pastel Purple)
+                    '#FFB3B3'   // Ready Orders (Pastel Pink)
+                ],
+                hoverOffset: 4
+            }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: true,
-            aspectRatio: 3,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 5
-                    }
+            plugins: {
+                tooltip: {
+                    backgroundColor: '#2c3e50',
+                    titleColor: '#ecf0f1',
+                    bodyColor: '#ecf0f1',
+                    borderColor: '#34495e',
+                    borderWidth: 1
+                },
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                            size: 14,
+                            family: 'Arial, sans-serif',
+                            color: '#2C3E50'
+                        },
+                        boxWidth: 20,
+                        padding: 15
+                    },
+                    onClick: null // Disable default toggle behavior
                 }
             }
         }
     });
 </script>
+
+
 
 </body>
 </html>

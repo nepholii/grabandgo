@@ -48,7 +48,7 @@
 	                                                   min="1" class="quantity-input">
 	                                            <button type="button" class="quantity-btn plus">+</button>
 	                                        </div>
-	                                        <button type="submit" class="update-btn">Update</button>
+	                                       
 	                                    </div>
 	                                </form>
 	                            </td>
