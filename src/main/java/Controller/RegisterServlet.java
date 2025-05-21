@@ -38,17 +38,17 @@ public class RegisterServlet extends HttpServlet {
         }
 
         // ✅ Handle profile image
-        Part filePart = request.getPart("image");  // "image" is the name attribute in your input file field
+        Part filePart = request.getPart("image");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-        String uploadPath = getServletContext().getRealPath("/uploaded_images");
-        System.out.println("Upload folder path: " + uploadPath);
+     // Save uploaded image to 'images' directory in project root
+        String projectPath = "C:/Users/Acer/eclipse-workspace/grabandgo/src/main/webapp/images";
+        File uploadFolder = new File(projectPath);
+        if (!uploadFolder.exists()) uploadFolder.mkdir();
 
-        File uploadDir = new File(uploadPath);
-        
-        if (!uploadDir.exists()) uploadDir.mkdir();  // Create folder if doesn't exist
-
-        filePart.write(uploadPath + File.separator + fileName);
+        String imagePath = "images" + File.separator + fileName;
+        String fullPath = projectPath + File.separator + fileName;
+        filePart.write(fullPath); // Saves file to disk
         
         // ✅ Create User object
         User user = new User();
