@@ -19,9 +19,8 @@
     </div>
 </c:if>
 
+<form action="CreateUserServlet" method="post" enctype="multipart/form-data">
 
-
-<form action="CreateUserServlet" method="post">
     <h2>Create New User</h2>
 
     <label for="first_name">First Name</label>
@@ -43,7 +42,15 @@
     <input type="password" id="password" name="password" required>
 
     <label for="address">Address</label>
-    <input type="text" id="address" name="address" required>
+    <select name="address" id="address" required>
+        <option value="" disabled selected>Select Address</option>
+        <option value="Kathmandu">Kathmandu</option>
+        <option value="Lalitpur">Lalitpur</option>
+        <option value="Bhaktapur">Bhaktapur</option>
+        <option value="Pokhara">Pokhara</option>
+        <option value="Biratnagar">Biratnagar</option>
+        <option value="Others">Others</option>
+    </select>
 
     <label for="gender">Gender</label>
     <select id="gender" name="gender" required>
@@ -51,6 +58,10 @@
         <option value="Male">Male</option>
         <option value="Female">Female</option>
     </select>
+
+   <label for="image">Image</label>
+<input type="file" name="image" id="image" accept="image/*" required>
+   
 
     <button type="submit">Create User</button>
 </form>

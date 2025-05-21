@@ -149,6 +149,18 @@ public class FoodDAO {
 	}
 
 
+	public int getFoodCount() throws SQLException, ClassNotFoundException {
+	    String sql = "SELECT COUNT(*) AS total FROM food";
+	    try (Connection conn = DatabaseConnection.getConnection();
+	         Statement stmt = conn.createStatement();
+	         ResultSet rs = stmt.executeQuery(sql)) {
+
+	        if (rs.next()) {
+	            return rs.getInt("total");
+	        }
+	    }
+	    return 0;
+	}
 
 
 

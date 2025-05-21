@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="DAO.UserDAO" %>
+<%@ page import="DAO.FoodDAO" %>
 <%
     String loggedInAdmin = (String) session.getAttribute("username");
 
     int customerCount = UserDAO.getUserCountByRole("Customer"); 
     int staffCount = UserDAO.getUserCountByRole("Staff"); 
-    int productCount = 320;
+    int productCount = new FoodDAO().getFoodCount(); 
 %>
 
 <!DOCTYPE html>
