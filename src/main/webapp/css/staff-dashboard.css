@@ -1,7 +1,8 @@
  body {
             font-family: 'Segoe UI', sans-serif;
             margin: 0;
-            background: #f4f7fa;
+            background: #F5F5DC; /* Creamy Beige */
+            overflow-x: hidden;
         }
 
         .navbar {
@@ -90,29 +91,55 @@
         .card {
             flex: 1;
             min-width: 200px;
-            background: white;
-            border-radius: 10px;
+            background: #FFDAB9; /* Soft Peach */
+            border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
         }
 
         .card i {
-            font-size: 24px;
+            font-size: 40px;
             margin-bottom: 10px;
             display: block;
+            color: #E2725B; /* Warm Terracotta */
         }
 
-        .chart-section {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-            margin-top: 20px;
-            width: 100%;
+        .card h3 {
+            color: #E2725B; /* Warm Terracotta */
+            font-size: 28px;
+            margin: 0;
+        }
+
+        .card p {
+            color: #333;
+            font-weight: 500;
         }
 
         h2 {
             margin-bottom: 20px;
-            color: #333;
+            color: #A0522D; /* Toasted Brown */
+        }
+
+        .chart-section {
+            background: #FFF8E7; /* Lightened cream */
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        canvas {
+            height: 550px !important;
+            width: 100% !important;
+            display: block;
         }

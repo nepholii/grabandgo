@@ -13,7 +13,7 @@
   
   <section class="about-section">
     <h2>About Us</h2>
-    <p>We are a passionate team dedicated to delivering the best food ordering experience. Meet the creative individuals behind Grab & Go.</p>
+    <p>Grab & Go is a convenient online food ordering platform that allows users to browse diverse menus, customize their meals, and place orders quickly and securely from any device. With features like user profiles, saved addresses, order history, and real-time tracking, it offers a seamless and personalized experience for customers. Restaurants can easily manage their offerings and reach more customers through the platform, making Grab & Go an all-in-one solution that lets users order ahead and conveniently pick up their food, saving time and enhancing their dining experience.</p>
     <div class="members-grid">
       
       <div class="member-card">
@@ -44,9 +44,7 @@
   
   
   
-<footer class="footer">
-    <p>&copy; 2025 Grab & Go. All rights reserved.</p>
-</footer>
+<%@ include file="footer.jsp" %>
   
 
 </body>
