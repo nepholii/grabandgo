@@ -161,6 +161,22 @@ public class FoodDAO {
 	    }
 	    return 0;
 	}
+	 public static int getCountByCategory(String category) {
+	        int count = 0;
+	        try (Connection conn = DatabaseConnection.getConnection();
+	             PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM food WHERE category = ?")) {
+	            stmt.setString(1, category);
+	            ResultSet rs = stmt.executeQuery();
+	            if (rs.next()) {
+	                count = rs.getInt(1);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return count;
+	    }
+
+	
 
 
 
