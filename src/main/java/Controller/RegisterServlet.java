@@ -13,9 +13,11 @@ import DAO.UserDAO;
 import Model.User;
 
 @WebServlet("/RegisterServlet")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-maxFileSize = 1024 * 1024 * 10,      // 10MB
-maxRequestSize = 1024 * 1024 * 50)   // 50MB
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024 * 2,  // 2MB
+    maxFileSize = 1024 * 1024 * 10,       // 10MB
+    maxRequestSize = 1024 * 1024 * 50     // 50MB
+)
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -41,15 +43,17 @@ public class RegisterServlet extends HttpServlet {
         Part filePart = request.getPart("image");
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
-     // Save uploaded image to 'images' directory in project root
-        String projectPath = "C:/Users/Acer/eclipse-workspace/grabandgo/src/main/webapp/images";
+        // ✅ Save uploaded image to 'images' directory inside webapp
+        String projectPath = getServletContext().getRealPath("/images");
         File uploadFolder = new File(projectPath);
         if (!uploadFolder.exists()) uploadFolder.mkdir();
 
-        String imagePath = "images" + File.separator + fileName;
         String fullPath = projectPath + File.separator + fileName;
-        filePart.write(fullPath); // Saves file to disk
-        
+        filePart.write(fullPath); // Save file to disk
+
+        // ✅ Store just the image filename or relative path
+        String imagePath = "images" + File.separator + fileName;
+
         // ✅ Create User object
         User user = new User();
         user.setFirstName(firstName);
@@ -62,7 +66,7 @@ public class RegisterServlet extends HttpServlet {
         user.setGender(gender);
         user.setRole(role);
         user.setStatus(status);
-        user.setImage(fileName);
+        user.setImage(fileName);  // or imagePath if you prefer full relative path
 
         // ✅ Register using DAO
         try {
