@@ -87,5 +87,31 @@ public class Food {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
+	 public int getPreparationHour() {
+		    try {
+		        String[] parts = preparationTime.split(":");
+		        return Integer.parseInt(parts[0]);
+		    } catch (Exception e) {
+		        return 0;
+		    }
+		}
+
+		public int getPreparationMinute() {
+		    try {
+		        String[] parts = preparationTime.split(":");
+		        return Integer.parseInt(parts[1]);
+		    } catch (Exception e) {
+		        return 0;
+		    }
+		}
+
+		public int getPreparationSecond() {
+		    try {
+		        String[] parts = preparationTime.split(":");
+		        return Integer.parseInt(parts[2]);
+		    } catch (Exception e) {
+		        return 0;
+		    }
+		}
     
 }

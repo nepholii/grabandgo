@@ -147,8 +147,66 @@ public class FoodDAO {
 
 	    return updated;
 	}
+	
+	
 
+	public List<Food> getFoodByCategory(String category) throws SQLException, ClassNotFoundException {
+	    List<Food> foodItems = new ArrayList<>();
+	    String sql = "SELECT * FROM food WHERE category = ? AND quantity > 0";
 
+	    try (Connection conn = DatabaseConnection.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	        stmt.setString(1, category);
+	        ResultSet rs = stmt.executeQuery();
+
+	        while (rs.next()) {
+	            Food food = new Food();
+	            food.setFoodId(rs.getInt("food_id"));
+	            food.setFoodName(rs.getString("food_name"));
+	            food.setFoodDescription(rs.getString("food_description"));
+	            food.setFoodPrice(rs.getDouble("food_price"));
+	            food.setCategory(rs.getString("category"));
+	            food.setQuantity(rs.getInt("quantity"));
+	            food.setPreparationTime(rs.getString("preparation_time"));
+	            food.setImagePath(rs.getString("image_path"));
+
+	            foodItems.add(food);
+	        }
+	    }
+	    return foodItems;
+	}
+
+	
+
+	public int getFoodCount() throws SQLException, ClassNotFoundException {
+	    String sql = "SELECT COUNT(*) AS total FROM food";
+	    try (Connection conn = DatabaseConnection.getConnection();
+	         Statement stmt = conn.createStatement();
+	         ResultSet rs = stmt.executeQuery(sql)) {
+
+	        if (rs.next()) {
+	            return rs.getInt("total");
+	        }
+	    }
+	    return 0;
+	}
+	 public static int getCountByCategory(String category) {
+	        int count = 0;
+	        try (Connection conn = DatabaseConnection.getConnection();
+	             PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM food WHERE category = ?")) {
+	            stmt.setString(1, category);
+	            ResultSet rs = stmt.executeQuery();
+	            if (rs.next()) {
+	                count = rs.getInt(1);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return count;
+	    }
+
+	
 
 
 

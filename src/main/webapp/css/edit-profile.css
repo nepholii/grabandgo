@@ -1,0 +1,100 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #121212;
+            font-family: 'Segoe UI', sans-serif;
+            color: #fff;
+        }
+
+        .edit-container {
+            max-width: 500px;
+            margin: 60px auto;
+            background-color: #1e1e1e;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.1);
+        }
+
+        .edit-container h2 {
+            text-align: center;
+            color: #FFCC00;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2a2a2a;
+            color: white;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #FF3C00;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .save-btn:hover {
+            background-color: #FFA500;
+        }
+        
+        .footer {
+            background-color: #1e1e1e;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+            color: #ccc;
+        }
+        
+         @media screen and (min-width: 1280px) and (max-width: 1920px) {
+            .edit-container {
+                max-width: 600px;
+                padding: 50px;
+            }
+
+            .form-group {
+                margin-bottom: 25px;
+            }
+
+            .save-btn {
+                padding: 16px;
+                font-size: 18px;
+            }
+
+            .edit-container h2 {
+                font-size: 32px;
+                margin-bottom: 40px;
+            }
+        }

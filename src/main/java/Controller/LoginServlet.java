@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
                             return;
                         case "customer":
                             System.out.println("🔄 Redirecting to customer-dashboard.jsp");
-                            response.sendRedirect("customer-dashboard.jsp");
+                            response.sendRedirect("CustomerDashboardServlet");
                             return;
                         default:
                             System.out.println("❌ Unknown role: " + role);

@@ -20,116 +20,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Customer</title>
-    <style>
-        :root {
-            --primary: #E2725B;        /* Warm Terracotta */
-            --secondary: #F5F5DC;      /* Creamy Beige */
-            --accent1: #A0522D;        /* Toasted Brown */
-            --accent2: #FFDAB9;        /* Soft Peach */
-            --bg-dark: #FFF5E9;        /* Light cream background variant */
-        }
-
-        body {
-            background-color: var(--secondary);
-            color: var(--accent1);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 600px;
-            margin: 50px auto;
-            background: white;
-            padding: 30px 25px;
-            border-radius: 15px;
-            box-shadow: 0 6px 20px rgba(160, 82, 45, 0.25);
-            box-sizing: border-box;
-        }
-
-        h2 {
-            text-align: center;
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 2.2rem;
-            margin-bottom: 30px;
-            letter-spacing: 1.1px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-top: 15px;
-            font-weight: 600;
-            color: var(--accent1);
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        select {
-            padding: 10px 12px;
-            margin-top: 8px;
-            border-radius: 8px;
-            border: 2px solid var(--accent2);
-            font-size: 1rem;
-            color: var(--accent1);
-            background-color: var(--bg-dark);
-            transition: border-color 0.3s ease;
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="password"]:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--primary);
-            background-color: #fff;
-            color: var(--accent1);
-        }
-
-        input[readonly] {
-            background-color: var(--accent2);
-            color: var(--primary);
-            cursor: not-allowed;
-            border-color: var(--accent1);
-        }
-
-        button {
-            margin-top: 30px;
-            padding: 12px 0;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(226, 114, 91, 0.6);
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: var(--accent1);
-            box-shadow: 0 8px 20px rgba(160, 82, 45, 0.8);
-        }
-
-        /* Responsive */
-        @media screen and (max-width: 480px) {
-            .container {
-                width: 95%;
-                padding: 20px 15px;
-            }
-
-            h2 {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
+   <link rel="stylesheet" type="text/css" href="css/editUser.css">
 </head>
 <body>
 
@@ -167,8 +58,17 @@
             <option value="Other" <%= "Other".equals(user.getGender()) ? "selected" : "" %>>Other</option>
         </select>
 
-        <label>Address</label>
-        <input type="text" name="address" value="<%= user.getAddress() %>">
+       <label>Address</label>
+<select name="address" id="address" required>
+    <option value="" disabled <%= user.getAddress() == null || user.getAddress().isEmpty() ? "selected" : "" %>>Select Address</option>
+    <option value="Kathmandu" <%= "Kathmandu".equals(user.getAddress()) ? "selected" : "" %>>Kathmandu</option>
+    <option value="Lalitpur" <%= "Lalitpur".equals(user.getAddress()) ? "selected" : "" %>>Lalitpur</option>
+    <option value="Bhaktapur" <%= "Bhaktapur".equals(user.getAddress()) ? "selected" : "" %>>Bhaktapur</option>
+    <option value="Pokhara" <%= "Pokhara".equals(user.getAddress()) ? "selected" : "" %>>Pokhara</option>
+    <option value="Biratnagar" <%= "Biratnagar".equals(user.getAddress()) ? "selected" : "" %>>Biratnagar</option>
+    <option value="Others" <%= "Others".equals(user.getAddress()) ? "selected" : "" %>>Others</option>
+</select>
+       
 
         <label>Status</label>
         <select name="status">

@@ -1,97 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="DAO.UserDAO" %>
+<%@ page import="DAO.FoodDAO" %>
 <%
     String loggedInAdmin = (String) session.getAttribute("username");
 
     int customerCount = UserDAO.getUserCountByRole("Customer"); 
     int staffCount = UserDAO.getUserCountByRole("Staff"); 
-    int productCount = 320;
+    int productCount = new FoodDAO().getFoodCount(); 
+
+    int mainCourseCount = FoodDAO.getCountByCategory("Main Course");
+    int dessertCount = FoodDAO.getCountByCategory("Dessert");
+    int appetizerCount = FoodDAO.getCountByCategory("Appetizer");
+    int beverageCount = FoodDAO.getCountByCategory("Beverage");
+    int saladCount = FoodDAO.getCountByCategory("Salad");
+    int soupCount = FoodDAO.getCountByCategory("Soup");
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Admin Dashboard</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            background: #F5F5DC; /* Creamy Beige */
-        }
-
-        .dashboard-container {
-            padding: 100px 20px 20px 20px;
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            color: #A0522D; /* Toasted Brown */
-        }
-
-        .card-row {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            flex: 1;
-            min-width: 200px;
-            background: #FFDAB9; /* Soft Peach */
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card div {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .card h3 {
-            color: #E2725B; /* Warm Terracotta */
-            font-size: 28px;
-            margin: 0;
-        }
-
-        .card p {
-            color: #333;
-            font-weight: 500;
-        }
-
-        .chart-section {
-        background: #FFF8E7; /* Lightened cream for contrast */
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
-        width: 100%;
-        max-width: 900px;      /* fix overflow */
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .chart-section canvas {
-        width: 100% !important;
-        height: 300px !important;
-        display: block;
-    }
-        
-
-        @media screen and (min-width: 1280px) and (max-width: 1920px) {
-            .dashboard-container {
-                padding-top: 120px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/admin-dashboard.css">
 </head>
 <body>
 
@@ -121,44 +51,50 @@
         </div>
     </div>
 
-    <!-- Orders Chart -->
+    <!-- Food Category Chart -->
     <div class="chart-section">
-        <h2>Orders Placed</h2>
-        <canvas id="orderChart" height="300"></canvas>
+        <h2>Food Distribution By Category</h2>
+        <canvas id="categoryChart" height="300"></canvas>
     </div>
 </div>
 
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('orderChart').getContext('2d');
-    const orderChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            datasets: [{
-                label: 'Orders Placed',
-                data: [30, 45, 28, 50, 40, 60, 75],
-                borderColor: '#E2725B', // Warm Terracotta
-                backgroundColor: 'rgba(226, 114, 91, 0.2)', // transparent fill
-                fill: true,
-                tension: 0.4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            aspectRatio: 3,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 10
-                    }
-                }
+const ctx = document.getElementById('categoryChart').getContext('2d');
+const categoryChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Main Course', 'Dessert', 'Appetizer', 'Beverage', 'Salad', 'Soup'],
+        datasets: [{
+            label: 'Number of Products',
+            data: [<%= mainCourseCount %>, <%= dessertCount %>, <%= appetizerCount %>, <%= beverageCount %>, <%= saladCount %>, <%= soupCount %>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(255, 159, 64, 0.7)',
+                'rgba(255, 205, 86, 0.7)',
+                'rgba(75, 192, 192, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(153, 102, 255, 0.7)'
+            ],
+            borderColor: '#fff',
+            borderWidth: 2,
+            borderRadius: 5
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: { stepSize: 1 }
             }
+        },
+        plugins: {
+            legend: { display: false }
         }
-    });
+    }
+});
 </script>
 
 </body>

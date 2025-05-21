@@ -162,6 +162,48 @@ public class StaffDAO {
         }
         return rowDeleted;
     }
+    public static int getStaffCountBySalaryRange(double min, double max) {
+        int count = 0;
+        try (Connection con = DatabaseConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(
+                 "SELECT COUNT(*) FROM staff WHERE salary BETWEEN ? AND ?")) {
+            ps.setDouble(1, min);
+            ps.setDouble(2, max);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) count = rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public static int getStaffCountBySalaryAbove(double min) {
+        int count = 0;
+        try (Connection con = DatabaseConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(
+                 "SELECT COUNT(*) FROM staff WHERE salary > ?")) {
+            ps.setDouble(1, min);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) count = rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public static int getStaffCountByShift(String shift) {
+        int count = 0;
+        try (Connection con = DatabaseConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(
+                 "SELECT COUNT(*) FROM staff WHERE shift = ?")) {
+            ps.setString(1, shift);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) count = rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 
 
 }
