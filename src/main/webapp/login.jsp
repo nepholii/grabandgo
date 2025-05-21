@@ -4,233 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="css/login.css">
-    <style>
-    * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-}
-
-body {
-    background: linear-gradient(to right, #FFFFE0, #FFFDD0);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container {
-    display: flex;
-    width: 900px;
-    height: 600px;
-    background-color: #FFFDD0;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(119, 221, 119, 0.3);
-}
-
-.form-container {
-    flex: 1;
-    padding: 40px;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-form h1 {
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-}
-
-input {
-    margin-bottom: 12px;
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 14px;
-    background-color: #FFFFE0;
-    color: #333;
-}
-
-button {
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    background: linear-gradient(to right, #77DD77, #E6E6FA);
-    color: #333;
-    font-weight: bold;
-    cursor: pointer;
-    transition: opacity 0.3s;
-}
-
-button:hover {
-    opacity: 0.9;
-}
-
-.error-message {
-    color: #cc6666;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.welcome-panel {
-    background: linear-gradient(to right, #77DD77, #E6E6FA);
-    color: #333;
-    flex: 1;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.welcome-img {
-    max-width: 180px;
-    margin-bottom: 20px;
-}
-
-.welcome-panel h1 {
-    margin-bottom: 10px;
-    font-size: 26px;
-}
-
-.welcome-panel p {
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-.ghost {
-    background-color: #FFFDD0;
-    color: #77DD77;
-    padding: 10px 20px;
-    border-radius: 20px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.ghost:hover {
-    background-color: #E6E6FA;
-}
-
-.password-wrapper {
-    position: relative;
-}
-
-.password-wrapper input {
-    width: 100%;
-    padding-right: 40px;
-}
-
-.toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    user-select: none;
-    font-size: 16px;
-    color: #666;
-}
-
-.remember-me {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 10px 0 20px;
-    font-size: 14px;
-    color: #555;
-}
-
-.remember-me input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    margin: 0 8px 0 0;
-}
-
-@media screen and (min-width: 1025px) {
-    body {
-        padding: 40px;
-    }
-
-    .container {
-        flex-direction: row;
-        width: 900px;
-        height: 600px;
-        margin: auto;
-    }
-
-    .form-container,
-    .welcome-panel {
-        width: 50%;
-        height: 100%;
-        border-radius: 0;
-        padding: 40px;
-    }
-
-    .welcome-img {
-        max-width: 150px;
-    }
-
-    form h1,
-    .welcome-panel h1 {
-        font-size: 26px;
-    }
-
-    input,
-    button {
-        font-size: 16px;
-        padding: 10px 14px;
-    }
-
-    .toggle-password {
-        font-size: 18px;
-    }
-
-    .remember-me {
-        font-size: 14px;
-    }
-
-    .ghost {
-        font-size: 14px;
-        padding: 10px 20px;
-    }
-}
-  </style>  
+    <link rel="stylesheet" type="text/css" href="css/Login.css">
+     
 </head>
 <body>
     <div class="container">
         <div class="form-container">
-            <form action="LoginServlet" method="post">
-                <h1>Login</h1>
+           <form action="LoginServlet" method="post">
+    <h1>Login</h1>
 
-                  <c:if test="${not empty param.error}">
-                    <div class="error-message">${param.error}</div>
-                </c:if>
+    <c:if test="${not empty param.error}">
+        <div class="error-message">${param.error}</div>
+    </c:if>
 
-                <input type="text" name="username" placeholder="Username" required>
-                <div class="password-wrapper">
-			    <input type="password" name="password" id="password" placeholder="Password" required>
-			    <span class="toggle-password" onclick="togglePassword()">👀</span>
-			</div>
-			<div class="remember-me">
-		    <input type="checkbox" name="remember" id="remember">
-		    <label for="remember">Remember Me</label>
-		</div>
-			
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" placeholder="Enter your username" required>
 
-                <button type="submit">Login</button>
-            </form>
+    <label for="password">Password</label>
+    <div class="password-wrapper">
+        <input type="password" name="password" id="password" placeholder="Enter your password" required>
+        <span class="toggle-password" onclick="togglePassword()">👀</span>
+    </div>
+
+    <button type="submit">Login</button>
+</form>
         </div>
 
         

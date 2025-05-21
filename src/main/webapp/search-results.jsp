@@ -5,73 +5,7 @@
 <html>
 <head>
     <title>Search Results</title>
-    <style>
-    * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #121212;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 20px;
-        }
-
-        h2 {
-            color: #FF3C00;
-            margin-bottom: 30px;
-            font-size: 28px;
-        }
-
-        .food-card {
-            background-color: #1e1e1e;
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            gap: 20px;
-            box-shadow: 0 0 10px rgba(255, 60, 0, 0.2);
-        }
-
-        .food-image {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid #444;
-        }
-
-        .food-info {
-            flex-grow: 1;
-        }
-
-        .food-name {
-            font-size: 20px;
-            color: #FFCC00;
-            margin-bottom: 10px;
-        }
-
-        .food-description {
-            font-size: 14px;
-            color: #ccc;
-        }
-
-        .food-price {
-            font-size: 16px;
-            font-weight: bold;
-            color: #4CAF50;
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/search-results.css">
 </head>
 <body>
     <div class="container">

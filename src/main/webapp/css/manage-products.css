@@ -1,0 +1,86 @@
+ :root {
+            --header-height: 120px;
+            --header-spacing: 20px;
+            --primary-color: #E2725B;    /* Warm Terracotta */
+            --secondary-color: #F5F5DC;  /* Creamy Beige */
+            --accent1-color: #A0522D;    /* Toasted Brown */
+            --accent2-color: #FFDAB9;    /* Soft Peach */
+        }
+
+       body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--secondary-color);
+            margin: 0;
+            padding: 0;
+        }
+
+       
+
+        .grid-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: calc(var(--header-height) + var(--header-spacing));
+        }
+
+        .grid-row {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .grid-card {
+            width: 220px;
+            height: 220px;
+            background-color: var(--accent2-color); /* Soft Peach */
+            border-radius: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--accent1-color); /* Toasted Brown */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+            font-size: 40px;
+            user-select: none;
+        }
+
+        .grid-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            background-color: var(--primary-color); /* Warm Terracotta */
+            color: var(--secondary-color); /* Creamy Beige */
+        }
+
+        .emoji-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            user-select: none;
+        }
+
+        .grid-card h2 {
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            color: var(--accent1-color);
+            user-select: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            .grid-card {
+                width: 180px;
+                height: 180px;
+                font-size: 32px;
+            }
+
+            .emoji-icon {
+                font-size: 32px;
+            }
+
+            .grid-card h2 {
+                font-size: 14px;
+            }
+        }
