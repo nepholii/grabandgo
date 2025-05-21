@@ -18,8 +18,8 @@
 <nav>
     <ul class="nav-links">
     <li>
-        <a href="customer-dashboard.jsp"
-           class="<%= uri.endsWith("customer-dashboard.jsp") ? "active" : "" %>">Home</a>
+       <a href="${pageContext.request.contextPath}/CustomerDashboardServlet"
+          class="<%= uri.contains("CustomerDashboardServlet") || uri.contains("customer-dashboard") ? "active" : "" %>">Home</a>
     </li>
     <li>
         <a href="MenuServlet"

@@ -147,7 +147,37 @@ public class FoodDAO {
 
 	    return updated;
 	}
+	
+	
 
+	public List<Food> getFoodByCategory(String category) throws SQLException, ClassNotFoundException {
+	    List<Food> foodItems = new ArrayList<>();
+	    String sql = "SELECT * FROM food WHERE category = ? AND quantity > 0";
+
+	    try (Connection conn = DatabaseConnection.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	        stmt.setString(1, category);
+	        ResultSet rs = stmt.executeQuery();
+
+	        while (rs.next()) {
+	            Food food = new Food();
+	            food.setFoodId(rs.getInt("food_id"));
+	            food.setFoodName(rs.getString("food_name"));
+	            food.setFoodDescription(rs.getString("food_description"));
+	            food.setFoodPrice(rs.getDouble("food_price"));
+	            food.setCategory(rs.getString("category"));
+	            food.setQuantity(rs.getInt("quantity"));
+	            food.setPreparationTime(rs.getString("preparation_time"));
+	            food.setImagePath(rs.getString("image_path"));
+
+	            foodItems.add(food);
+	        }
+	    }
+	    return foodItems;
+	}
+
+	
 
 
 
