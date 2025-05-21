@@ -153,15 +153,50 @@ public class StaffDAO {
     }
     public boolean deleteStaffById(int staffId) throws ClassNotFoundException, Exception {
         boolean rowDeleted = false;
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("DELETE FROM staff WHERE staff_id = ?")) {
-            stmt.setInt(1, staffId);
-            rowDeleted = stmt.executeUpdate() > 0;
+        Connection conn = null;
+
+        try {
+            conn = DatabaseConnection.getConnection();
+            conn.setAutoCommit(false); // Begin transaction
+
+            // First delete from staff table
+            try (PreparedStatement stmt1 = conn.prepareStatement("DELETE FROM staff WHERE staff_id = ?")) {
+                stmt1.setInt(1, staffId);
+                int staffRows = stmt1.executeUpdate();
+
+                // Then delete from users table
+                try (PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM users WHERE user_id = ?")) {
+                    stmt2.setInt(1, staffId);
+                    int userRows = stmt2.executeUpdate();
+
+                    rowDeleted = staffRows > 0 && userRows > 0;
+                }
+            }
+
+            conn.commit(); // Commit transaction
         } catch (SQLException e) {
+            if (conn != null) {
+                try {
+                    conn.rollback(); // Rollback on error
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
             e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.setAutoCommit(true);
+                    conn.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
+
         return rowDeleted;
     }
+
     public static int getStaffCountBySalaryRange(double min, double max) {
         int count = 0;
         try (Connection con = DatabaseConnection.getConnection();
