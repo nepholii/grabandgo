@@ -43,6 +43,7 @@
   </section>
   
   
+  
 <footer class="footer">
     <p>&copy; 2025 Grab & Go. All rights reserved.</p>
 </footer>

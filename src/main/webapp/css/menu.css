@@ -62,18 +62,18 @@
         }
 
         .menu-item p {
-		    font-size: 14px;
-		    color: #ccc;
-		    margin-bottom: 10px;
-		
-		    display: -webkit-box;
-		    -webkit-line-clamp: 2;       /* limit to 2 lines */
-		    -webkit-box-orient: vertical;
-		    overflow: hidden;
-		    text-overflow: ellipsis;
-		    word-wrap: break-word;
-		    white-space: normal;          /* allow wrapping */
-		}
+	    font-size: 14px;
+	    color: #ccc;
+	    margin-bottom: 10px;
+	
+	    display: -webkit-box;
+	    -webkit-line-clamp: 2;       /* limit to 2 lines */
+	    -webkit-box-orient: vertical;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    word-wrap: break-word;
+	    white-space: normal;          /* allow wrapping */
+	}
         .price {
             font-size: 18px;
             font-weight: bold;

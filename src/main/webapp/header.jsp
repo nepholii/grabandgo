@@ -18,8 +18,8 @@
 <nav>
     <ul class="nav-links">
     <li>
-        <a href="customer-dashboard.jsp"
-           class="<%= uri.endsWith("customer-dashboard.jsp") ? "active" : "" %>">Home</a>
+       <a href="${pageContext.request.contextPath}/CustomerDashboardServlet"
+          class="<%= uri.contains("CustomerDashboardServlet") || uri.contains("customer-dashboard") ? "active" : "" %>">Home</a>
     </li>
     <li>
         <a href="MenuServlet"
@@ -54,7 +54,7 @@
     <div id="profileContainer" class="profile-info">
         <%
             String imageFile = (String) session.getAttribute("image");
-            String imagePath = (imageFile != null) ? "uploaded_images/" + imageFile : "images/profile.png";
+            String imagePath = (imageFile != null) ? "images/" + imageFile : "images/profile.png";
         %>
         <img src="<%= imagePath %>" alt="User" class="profile-img" id="profileImg">
         <% if (loggedInUser != null) { %>
