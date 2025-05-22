@@ -4,18 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/Login.css">
+    
      
 </head>
 <body>
     <div class="container">
         <div class="form-container">
            <form action="LoginServlet" method="post">
+           <c:if test="${not empty param.message}">
+			    <p style="text-align: center; color: green; font-weight: bold; margin-bottom: 20px;">
+			        ${param.message}
+			    </p>
+			</c:if>
+			
+			<c:if test="${not empty param.error}">
+			    <p style="text-align: center; color: red; font-weight: bold; margin-bottom: 20px;">
+			        ${param.error}
+			    </p>
+			</c:if>
+
     <h1>Login</h1>
 
-    <c:if test="${not empty param.error}">
-        <div class="error-message">${param.error}</div>
-    </c:if>
+  
 
     <label for="username">Username</label>
     <input type="text" name="username" id="username" placeholder="Enter your username" required>
