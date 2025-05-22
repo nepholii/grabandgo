@@ -49,6 +49,7 @@ public class RegisterServlet extends HttpServlet {
         if (!uploadFolder.exists()) uploadFolder.mkdir();
 
         String fullPath = projectPath + File.separator + fileName;
+        System.out.println("Image saved to: " + fullPath);
         filePart.write(fullPath); // Save file to disk
 
         // ✅ Store just the image filename or relative path
