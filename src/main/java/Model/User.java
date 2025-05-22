@@ -14,10 +14,9 @@ public class User {
     private String status; // Active, Inactive
     private String image_path;
 
-    // ✅ Default Constructor
     public User() {}
 
-    // ✅ Parameterized Constructor
+   
     public User(int id, String firstName, String lastName, String username, String phone,
                 String email, String password, String address, String gender,
                 String role, String status, String image_path) {
