@@ -41,20 +41,32 @@ public class RegisterServlet extends HttpServlet {
 
         // ✅ Handle profile image
         Part filePart = request.getPart("image");
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        String fileName;
 
-        // ✅ Save uploaded image to 'images' directory inside webapp
-        String projectPath = getServletContext().getRealPath("/images");
-        File uploadFolder = new File(projectPath);
-        if (!uploadFolder.exists()) uploadFolder.mkdir();
+        // Check if user uploaded an image
+        if (filePart != null && filePart.getSize() > 0) {
+            fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
+<<<<<<< HEAD
         String fullPath = projectPath + File.separator + fileName;
         System.out.println("Image saved to: " + fullPath);
         filePart.write(fullPath); // Save file to disk
+=======
+            // ✅ Save uploaded image to 'images' folder
+            String projectPath = getServletContext().getRealPath("/images");
+            File uploadFolder = new File(projectPath);
+            if (!uploadFolder.exists()) uploadFolder.mkdir();
+>>>>>>> 4899ee3f7e8be2f8867bc724159d287f471a5a58
 
-        // ✅ Store just the image filename or relative path
-        String imagePath = "images" + File.separator + fileName;
+            String fullPath = projectPath + File.separator + fileName;
+            filePart.write(fullPath); // Save file to disk
 
+            System.out.println("Uploaded image saved to: " + fullPath);
+        } else {
+            // ✅ No image uploaded, assign default
+            fileName = "profile.png";
+            System.out.println("No image uploaded. Using default image.");
+        }
         // ✅ Create User object
         User user = new User();
         user.setFirstName(firstName);

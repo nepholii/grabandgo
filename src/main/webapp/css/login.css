@@ -132,19 +132,7 @@
 	    font-size: 16px;
 	    color: #666;
 	}
-	.remember-me {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 10px 0 20px;
-    font-size: 14px;
-    color: #555;
-	}
-	.remember-me input[type="checkbox"] {
-	    width: 16px;
-	    height: 16px;
-	    margin: 0 8px 0 0;
-	}
+	
 	@media screen and (min-width: 1025px) {
     body {
         padding: 40px;
@@ -182,9 +170,6 @@
         font-size: 18px;
     }
 
-    .remember-me {
-        font-size: 14px;
-    }
 
     .ghost {
         font-size: 14px;

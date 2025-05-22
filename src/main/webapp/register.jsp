@@ -55,8 +55,10 @@
                     <option value="Other">Other</option>
                 </select>
                  <div class="file-input">
-				    <label class="file-label" for="image">Upload Profile Image <span id="tick" style="display:none;">✅</span></label>
-				    <input type="file" name="image" id="image" accept="image/*" required onchange="showTick()">
+				    <label class="file-label" for="image">Upload Profile Image (optional) <span id="tick" style="display:none;">✅</span></label>
+
+				    <input type="file" name="image" id="image" accept="image/*" onchange="showTick()">
+
 				</div>
 
                 <button type="submit">Register</button>
