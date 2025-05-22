@@ -16,6 +16,10 @@
     <link rel="stylesheet" type="text/css" href="css/delete-user.css">
 </head>
 <body>
+<br>
+<br>
+<br>
+<br>
 
 <h2>Delete Users</h2>
 

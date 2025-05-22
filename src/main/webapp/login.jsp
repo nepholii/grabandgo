@@ -24,10 +24,7 @@
 </c:if>
     <h1>Login</h1>
 
-    <c:if test="${not empty param.error}">
-        <div class="error-message">${param.error}</div>
-    </c:if>
-
+    
     <label for="username">Username</label>
     <input type="text" name="username" id="username" placeholder="Enter your username" required>
 

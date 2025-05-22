@@ -47,16 +47,16 @@ public class RegisterServlet extends HttpServlet {
         if (filePart != null && filePart.getSize() > 0) {
             fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
-<<<<<<< HEAD
-        String fullPath = projectPath + File.separator + fileName;
-        System.out.println("Image saved to: " + fullPath);
-        filePart.write(fullPath); // Save file to disk
-=======
+//<<<<<<< HEAD
+//        String fullPath = projectPath + File.separator + fileName;
+//        System.out.println("Image saved to: " + fullPath);
+//        filePart.write(fullPath); // Save file to disk
+//=======
             // ✅ Save uploaded image to 'images' folder
             String projectPath = getServletContext().getRealPath("/images");
             File uploadFolder = new File(projectPath);
             if (!uploadFolder.exists()) uploadFolder.mkdir();
->>>>>>> 4899ee3f7e8be2f8867bc724159d287f471a5a58
+
 
             String fullPath = projectPath + File.separator + fileName;
             filePart.write(fullPath); // Save file to disk
