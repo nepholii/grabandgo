@@ -89,7 +89,7 @@ public class RegisterServlet extends HttpServlet {
             if (isRegistered) {
                 response.sendRedirect("login.jsp?message=Registration successful. Please login.");
             } else {
-                response.sendRedirect("register.jsp?error=Registration failed. Username might already exist.");
+                response.sendRedirect("register.jsp?error=Registration failed. Username or email might already exist.");
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
