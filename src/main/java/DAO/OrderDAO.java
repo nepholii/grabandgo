@@ -10,17 +10,18 @@ import java.util.List;
 public class OrderDAO {
 	
     public int createOrder(Order order) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO Orders (order_price, payment_status, order_status, user_id, cart_id) " +
-                     "VALUES (?, ?, ?, ?, ?)";
+    	 String sql = "INSERT INTO Orders (order_price, payment_status, order_status, user_id, cart_id, pickup_time) " +
+                 "VALUES (?, ?, ?, ?, ?, ?)";  // Added pickup_time
+    
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
         
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            
-            stmt.setDouble(1, order.getOrderPrice());
-            stmt.setString(2, order.getPaymentStatus());
-            stmt.setString(3, order.getOrderStatus());
-            stmt.setInt(4, order.getUserId());
-            stmt.setInt(5, order.getCartId());
+        stmt.setDouble(1, order.getOrderPrice());
+        stmt.setString(2, order.getPaymentStatus());
+        stmt.setString(3, order.getOrderStatus());
+        stmt.setInt(4, order.getUserId());
+        stmt.setInt(5, order.getCartId());
+        stmt.setTimestamp(6, order.getPickupTime());
             
             int affectedRows = stmt.executeUpdate();
             
