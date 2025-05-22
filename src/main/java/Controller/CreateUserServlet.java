@@ -76,7 +76,7 @@ public class CreateUserServlet extends HttpServlet {
                 request.setAttribute("message", "User created successfully!");
                 request.setAttribute("messageType", "success");
             } else {
-                request.setAttribute("message", "Username already exists.");
+                request.setAttribute("message", "Username or Email already exists.");
                 request.setAttribute("messageType", "error");
             }
 

@@ -310,8 +310,63 @@ public class UserDAO {
         return count;
     }
 
- 
+    
+    public boolean updateUserBasicInfo(User user) throws ClassNotFoundException {
+        String sql = "UPDATE users SET first_name=?, last_name=?, username=?, phone=?, "
+                   + "email=?, address=?, gender=? WHERE user_id=?";
 
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+            stmt.setString(1, user.getFirstName());
+            stmt.setString(2, user.getLastName());
+            stmt.setString(3, user.getUsername());
+            stmt.setString(4, user.getPhone());
+            stmt.setString(5, user.getEmail());
+            stmt.setString(6, user.getAddress());
+            stmt.setString(7, user.getGender());
+            stmt.setInt(8, user.getId());
 
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateUserPassword(int userId, String newPassword) throws ClassNotFoundException {
+        String sql = "UPDATE users SET password=? WHERE user_id=?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            String hashedPassword = PasswordUtils.hashPassword(newPassword);
+            stmt.setString(1, hashedPassword);
+            stmt.setInt(2, userId);
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateUserImage(int userId, String imagePath) throws ClassNotFoundException {
+        String sql = "UPDATE users SET image_path=? WHERE user_id=?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, imagePath);
+            stmt.setInt(2, userId);
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

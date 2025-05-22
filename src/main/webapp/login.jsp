@@ -13,6 +13,7 @@
         <div class="form-container">
            <form action="LoginServlet" method="post">
            <c:if test="${not empty param.message}">
+
 			    <p style="text-align: center; color: green; font-weight: bold; margin-bottom: 20px;">
 			        ${param.message}
 			    </p>
@@ -27,6 +28,21 @@
     <h1>Login</h1>
 
   
+
+
+    <div style="color: green; font-weight: bold;">
+        ${param.message}
+    </div>
+	</c:if>
+
+<c:if test="${not empty param.error}">
+    <div style="color: red; font-weight: bold;">
+        ${param.error}
+    </div>
+</c:if>
+    <h1>Login</h1>
+
+    
 
     <label for="username">Username</label>
     <input type="text" name="username" id="username" placeholder="Enter your username" required>

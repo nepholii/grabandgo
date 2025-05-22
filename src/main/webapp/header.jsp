@@ -26,9 +26,11 @@
            class="<%= uri.contains("MenuServlet") || uri.contains("menu") ? "active" : "" %>">Menu</a>
     </li>
     <li>
-        <a href="orderhistory.jsp"
-           class="<%= uri.contains("orderhistory") ? "active" : "" %>">Order History</a>
-    </li>
+	    <a href="${pageContext.request.contextPath}/OrderHistoryServlet"
+	       class="<%= uri.contains("OrderHistoryServlet") || uri.contains("orderHistory") ? "active" : "" %>">
+	       Order History
+	    </a>
+	</li>
     <li>
         <a href="aboutus.jsp"
            class="<%= uri.contains("aboutus") ? "active" : "" %>">About us</a>

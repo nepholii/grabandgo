@@ -9,8 +9,6 @@ import java.util.List;
 
 public class OrderDAO {
 	
-    
-    
     public int createOrder(Order order) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO Orders (order_price, payment_status, order_status, user_id, cart_id) " +
                      "VALUES (?, ?, ?, ?, ?)";

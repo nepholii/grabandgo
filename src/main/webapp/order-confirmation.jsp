@@ -60,8 +60,9 @@
         
         <div class="action-buttons">
             <a href="MenuServlet" class="btn btn-primary">Order Again</a>
-            <a href="order-history.jsp" class="btn btn-secondary">View Order History</a>
+            <a href="OrderHistoryServlet" class="btn btn-secondary">View Order History</a>
         </div>
     </div>
+    <%@ include file="footer.jsp" %>
 </body>
 </html>
