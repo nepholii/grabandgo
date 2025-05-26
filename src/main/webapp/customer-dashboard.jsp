@@ -17,7 +17,7 @@
         <h1>Satisfy Your Cravings,</h1>
         <p>Order Online, Grab Hot and Fresh!</p>
         <a href="MenuServlet" class="hero-btn">Browse Menu</a>
-    </div>
+    </div>	
 </section>
 
 <%
