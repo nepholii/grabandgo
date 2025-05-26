@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="container">
+    <br>
         <h2>Search Results for "<c:out value='${searchKeyword}'/>"</h2>
 
         <c:choose>

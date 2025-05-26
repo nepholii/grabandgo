@@ -27,20 +27,7 @@
 
     <h1>Login</h1>
 
-  
 
-
-    <div style="color: green; font-weight: bold;">
-        ${param.message}
-    </div>
-	</c:if>
-
-<c:if test="${not empty param.error}">
-    <div style="color: red; font-weight: bold;">
-        ${param.error}
-    </div>
-</c:if>
-    <h1>Login</h1>
 
     
 
