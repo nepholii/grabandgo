@@ -44,7 +44,7 @@ public class OrderHistoryServlet extends HttpServlet {
             request.setAttribute("ongoingOrders", ongoingOrders);
             request.setAttribute("completedOrders", completedOrders);
             
-            request.getRequestDispatcher("/orderHistory.jsp").forward(request, response);
+            request.getRequestDispatcher("orderHistory.jsp").forward(request, response);
             
         } catch (SQLException | ClassNotFoundException e) {
             request.setAttribute("error", "Error retrieving order history: " + e.getMessage());

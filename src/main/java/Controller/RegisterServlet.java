@@ -21,7 +21,7 @@ import Model.User;
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // ✅ Collect form data
+     
         String firstName = request.getParameter("first_name");
         String lastName = request.getParameter("last_name");
         String username = request.getParameter("username");
@@ -30,44 +30,39 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String address = request.getParameter("address");
         String gender = request.getParameter("gender");
-        String role = "Customer"; // default
-        String status = "Active"; // default
+        String role = "Customer"; 
+        String status = "Active"; 
 
-        // ✅ Basic input validation
+ 
         if (username == null || password == null || username.length() < 5 || password.length() < 6) {
             response.sendRedirect("register.jsp?error=Username must be at least 5 characters and password at least 6 characters");
             return;
         }
 
-        // ✅ Handle profile image
+       
         Part filePart = request.getPart("image");
         String fileName;
 
-        // Check if user uploaded an image
         if (filePart != null && filePart.getSize() > 0) {
             fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
-//<<<<<<< HEAD
-//        String fullPath = projectPath + File.separator + fileName;
-//        System.out.println("Image saved to: " + fullPath);
-//        filePart.write(fullPath); // Save file to disk
-//=======
-            // ✅ Save uploaded image to 'images' folder
+
+      
             String projectPath = getServletContext().getRealPath("/images");
             File uploadFolder = new File(projectPath);
             if (!uploadFolder.exists()) uploadFolder.mkdir();
 
 
             String fullPath = projectPath + File.separator + fileName;
-            filePart.write(fullPath); // Save file to disk
+            filePart.write(fullPath); 
 
             System.out.println("Uploaded image saved to: " + fullPath);
         } else {
-            // ✅ No image uploaded, assign default
+           
             fileName = "profile.png";
             System.out.println("No image uploaded. Using default image.");
         }
-        // ✅ Create User object
+       
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
@@ -79,9 +74,9 @@ public class RegisterServlet extends HttpServlet {
         user.setGender(gender);
         user.setRole(role);
         user.setStatus(status);
-        user.setImage(fileName);  // or imagePath if you prefer full relative path
+        user.setImage(fileName);  
 
-        // ✅ Register using DAO
+      
         try {
             UserDAO dao = new UserDAO();
             boolean isRegistered = dao.registerUser(user);
